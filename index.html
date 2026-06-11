@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pawfect Grooming - Professional Pet Grooming</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            heading: ['Fredoka', 'sans-serif'],
+            body: ['Nunito', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    body { font-family: 'Nunito', sans-serif; background-color: #FFF7ED; }
+
+    .clay-card {
+      border: 3px solid rgba(0,0,0,0.07);
+      box-shadow: 0 8px 24px rgba(249,115,22,0.13), inset 0 1px 0 rgba(255,255,255,0.7);
+      border-radius: 20px;
+      transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+    }
+    .clay-card:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(249,115,22,0.2), inset 0 1px 0 rgba(255,255,255,0.7); }
+
+    .clay-btn {
+      border: 3px solid rgba(0,0,0,0.1);
+      box-shadow: 0 6px 16px rgba(37,99,235,0.35), inset 0 1px 0 rgba(255,255,255,0.25);
+      border-radius: 14px;
+      transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+      display: inline-block;
+    }
+    .clay-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(37,99,235,0.45), inset 0 1px 0 rgba(255,255,255,0.25); }
+    .clay-btn:active { transform: translateY(1px); box-shadow: 0 2px 8px rgba(37,99,235,0.2), inset 0 2px 4px rgba(0,0,0,0.08); }
+
+    .clay-btn-orange {
+      border: 3px solid rgba(0,0,0,0.1);
+      box-shadow: 0 6px 16px rgba(249,115,22,0.35), inset 0 1px 0 rgba(255,255,255,0.25);
+      border-radius: 14px;
+      transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+      display: inline-block;
+    }
+    .clay-btn-orange:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(249,115,22,0.45); }
+    .clay-btn-orange:active { transform: translateY(1px); }
+
+    .clay-nav {
+      border: 2px solid rgba(255,255,255,0.85);
+      box-shadow: 0 8px 32px rgba(249,115,22,0.1), inset 0 1px 0 rgba(255,255,255,0.9);
+      border-radius: 18px;
+      backdrop-filter: blur(14px);
+    }
+
+    .clay-input {
+      border: 3px solid rgba(249,115,22,0.25);
+      border-radius: 12px;
+      box-shadow: inset 0 2px 6px rgba(0,0,0,0.04);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+    .clay-input:focus {
+      border-color: #F97316;
+      box-shadow: 0 0 0 3px rgba(249,115,22,0.18), inset 0 2px 6px rgba(0,0,0,0.04);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body class="overflow-x-hidden">
+
+  <!-- Floating Navbar -->
+  <div class="fixed top-4 left-4 right-4 z-50 max-w-6xl mx-auto">
+    <nav class="clay-nav bg-white/90 px-4 sm:px-6 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <svg class="w-9 h-9" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="18" cy="18" r="18" fill="#FFF7ED"/>
+          <ellipse cx="18" cy="23" rx="7" ry="5.5" fill="#F97316"/>
+          <circle cx="13" cy="16.5" r="2.5" fill="#F97316"/>
+          <circle cx="23" cy="16.5" r="2.5" fill="#F97316"/>
+          <ellipse cx="18" cy="14" rx="2.5" ry="3" fill="#F97316"/>
+        </svg>
+        <span class="font-heading font-bold text-xl text-[#9A3412]">Pawfect<span class="text-[#F97316]">.</span></span>
+      </div>
+      <div class="hidden md:flex items-center gap-6 font-semibold text-[#9A3412]">
+        <a href="#services" class="hover:text-[#F97316] transition-colors duration-200 cursor-pointer">Services</a>
+        <a href="#how-it-works" class="hover:text-[#F97316] transition-colors duration-200 cursor-pointer">How It Works</a>
+        <a href="#reviews" class="hover:text-[#F97316] transition-colors duration-200 cursor-pointer">Reviews</a>
+      </div>
+      <a href="#book" class="clay-btn bg-[#2563EB] text-white font-heading font-semibold px-5 py-2 text-sm cursor-pointer">Book Now</a>
+    </nav>
+  </div>
+
+  <!-- Hero -->
+  <section class="min-h-screen flex items-center pt-28 pb-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+      <div class="absolute top-20 left-8 w-56 h-56 bg-[#F97316]/10 rounded-full blur-3xl"></div>
+      <div class="absolute bottom-20 right-8 w-72 h-72 bg-[#2563EB]/06 rounded-full blur-3xl"></div>
+    </div>
+    <div class="max-w-6xl mx-auto w-full grid lg:grid-cols-2 gap-12 items-center relative z-10">
+      <!-- Copy -->
+      <div>
+        <div class="inline-flex items-center gap-2 bg-[#F97316]/10 border border-[#F97316]/25 rounded-full px-4 py-1.5 mb-6">
+          <svg class="w-4 h-4 text-[#F97316]" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+          </svg>
+          <span class="text-[#9A3412] font-semibold text-sm">Trusted by 2,000+ pet families</span>
+        </div>
+        <h1 class="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold text-[#9A3412] leading-tight mb-5">
+          Your Pet Deserves<br/>
+          <span class="text-[#F97316]">The Best Groom</span><br/>
+          In Town
+        </h1>
+        <p class="text-[#9A3412]/70 text-lg font-medium mb-8 max-w-lg leading-relaxed">
+          Professional grooming for dogs and cats — baths, haircuts, nail trims and more.
+          We treat every pet like our own. Happy paws, happy tails!
+        </p>
+
+        <!-- Quick booking pill -->
+        <div class="clay-card bg-white p-5 mb-7 max-w-md">
+          <p class="font-heading font-semibold text-[#9A3412] mb-3 text-sm">Quick-book a session</p>
+          <div class="flex flex-col sm:flex-row gap-3">
+            <label for="quick-service" class="sr-only">Select service</label>
+            <select id="quick-service" class="clay-input flex-1 px-4 py-2.5 bg-white text-[#9A3412] font-medium text-sm cursor-pointer">
+              <option value="">Select service...</option>
+              <option>Full Groom</option>
+              <option>Bath &amp; Dry</option>
+              <option>Nail Trim</option>
+              <option>Puppy Package</option>
+            </select>
+            <a href="#book" class="clay-btn bg-[#2563EB] text-white font-heading font-semibold px-5 py-2.5 text-sm text-center cursor-pointer whitespace-nowrap">Book Now</a>
+          </div>
+        </div>
+
+        <!-- Trust chips -->
+        <div class="flex flex-wrap gap-4 text-sm font-semibold text-[#9A3412]/65">
+          <div class="flex items-center gap-1.5">
+            <svg class="w-5 h-5 text-[#F97316]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            Certified Groomers
+          </div>
+          <div class="flex items-center gap-1.5">
+            <svg class="w-5 h-5 text-[#F97316]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+            Pet-Safe Products
+          </div>
+          <div class="flex items-center gap-1.5">
+            <svg class="w-5 h-5 text-[#F97316]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            Same-Day Slots
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero visual -->
+      <div class="hidden lg:flex justify-center items-center relative">
+        <div class="clay-card bg-white p-6 w-72 relative z-10">
+          <div class="w-full aspect-square rounded-2xl bg-gradient-to-br from-[#F97316]/15 to-[#FB923C]/25 flex items-center justify-center mb-4">
+            <svg viewBox="0 0 200 200" class="w-44 h-44" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustrated dog">
+              <!-- Body -->
+              <ellipse cx="100" cy="135" rx="48" ry="38" fill="#FB923C"/>
+              <!-- Head -->
+              <circle cx="100" cy="82" r="34" fill="#FB923C"/>
+              <!-- Ears -->
+              <ellipse cx="73" cy="62" rx="13" ry="19" fill="#F97316" transform="rotate(-15 73 62)"/>
+              <ellipse cx="127" cy="62" rx="13" ry="19" fill="#F97316" transform="rotate(15 127 62)"/>
+              <!-- Eyes -->
+              <circle cx="90" cy="77" r="5" fill="#9A3412"/>
+              <circle cx="110" cy="77" r="5" fill="#9A3412"/>
+              <circle cx="91.5" cy="75.5" r="1.8" fill="white"/>
+              <circle cx="111.5" cy="75.5" r="1.8" fill="white"/>
+              <!-- Nose -->
+              <ellipse cx="100" cy="88" rx="7" ry="5" fill="#9A3412"/>
+              <circle cx="98" cy="87" r="1.8" fill="white"/>
+              <!-- Smile -->
+              <path d="M89 95 Q100 105 111 95" stroke="#9A3412" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+              <!-- Tail -->
+              <path d="M146 128 Q168 104 158 82" stroke="#F97316" stroke-width="11" stroke-linecap="round" fill="none"/>
+              <!-- Legs -->
+              <rect x="66" y="158" width="17" height="24" rx="8" fill="#F97316"/>
+              <rect x="88" y="161" width="17" height="21" rx="8" fill="#F97316"/>
+              <rect x="110" y="161" width="17" height="21" rx="8" fill="#F97316"/>
+            </svg>
+          </div>
+          <div class="text-center">
+            <p class="font-heading font-semibold text-[#9A3412] text-lg">Just Groomed!</p>
+            <div class="flex justify-center gap-0.5 mt-1" aria-label="5 star rating">
+              <!-- 5 stars -->
+              <svg class="w-4 h-4 text-[#F97316]" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg class="w-4 h-4 text-[#F97316]" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg class="w-4 h-4 text-[#F97316]" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg class="w-4 h-4 text-[#F97316]" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg class="w-4 h-4 text-[#F97316]" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            </div>
+          </div>
+        </div>
+        <!-- Floating badges -->
+        <div class="clay-card bg-white px-4 py-2.5 absolute -top-3 -right-6 z-20">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center">
+              <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            <div>
+              <p class="text-xs font-bold text-[#9A3412]">Available Today</p>
+              <p class="text-xs text-[#9A3412]/55">3 slots left</p>
+            </div>
+          </div>
+        </div>
+        <div class="clay-card bg-[#F97316] px-4 py-2.5 absolute -bottom-3 -left-6 z-20">
+          <p class="text-white font-heading font-semibold text-sm">2,000+ Happy Paws</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="py-16 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-12">
+        <h2 class="font-heading text-3xl sm:text-4xl font-bold text-[#9A3412] mb-3">Our Grooming Services</h2>
+        <p class="text-[#9A3412]/65 font-medium max-w-xl mx-auto">From a quick tidy-up to a full spa day — everything your furry friend needs.</p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
+        <div class="clay-card bg-white p-6 cursor-pointer">
+          <div class="w-14 h-14 rounded-2xl bg-[#FFF7ED] flex items-center justify-center mb-4 border-2 border-[#F97316]/20">
+            <svg class="w-7 h-7 text-[#F97316]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+          </div>
+          <h3 class="font-heading font-semibold text-[#9A3412] text-lg mb-2">Full Groom</h3>
+          <p class="text-[#9A3412]/60 text-sm leading-relaxed">Bath, blow-dry, haircut, nail trim, ear clean, and bandana. The complete package!</p>
+          <p class="text-[#F97316] font-heading font-bold mt-3">From $55</p>
+        </div>
+
+        <div class="clay-card bg-white p-6 cursor-pointer">
+          <div class="w-14 h-14 rounded-2xl bg-[#FFF7ED] flex items-center justify-center mb-4 border-2 border-[#F97316]/20">
+            <svg class="w-7 h-7 text-[#F97316]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          </div>
+          <h3 class="font-heading font-semibold text-[#9A3412] text-lg mb-2">Bath &amp; Dry</h3>
+          <p class="text-[#9A3412]/60 text-sm leading-relaxed">Shampoo, conditioner &amp; blow-dry with pet-safe fragrant products. Fresh and fluffy!</p>
+          <p class="text-[#F97316] font-heading font-bold mt-3">From $35</p>
+        </div>
+
+        <div class="clay-card bg-white p-6 cursor-pointer">
+          <div class="w-14 h-14 rounded-2xl bg-[#FFF7ED] flex items-center justify-center mb-4 border-2 border-[#F97316]/20">
+            <svg class="w-7 h-7 text-[#F97316]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
+          </div>
+          <h3 class="font-heading font-semibold text-[#9A3412] text-lg mb-2">Nail Trim</h3>
+          <p class="text-[#9A3412]/60 text-sm leading-relaxed">Stress-free nail clipping and filing. Includes paw pad moisturizer. Quick &amp; gentle.</p>
+          <p class="text-[#F97316] font-heading font-bold mt-3">From $18</p>
+        </div>
+
+        <div class="clay-card bg-[#F97316] p-6 cursor-pointer">
+          <div class="w-14 h-14 rounded-2xl bg-white/20 flex items-center justify-center mb-4 border-2 border-white/30">
+            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+          </div>
+          <h3 class="font-heading font-semibold text-white text-lg mb-2">Puppy Package</h3>
+          <p class="text-white/80 text-sm leading-relaxed">A gentle first-groom experience designed to build positive associations for life.</p>
+          <p class="text-white font-heading font-bold mt-3">From $40</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section id="how-it-works" class="py-16 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-12">
+        <h2 class="font-heading text-3xl sm:text-4xl font-bold text-[#9A3412] mb-3">How It Works</h2>
+        <p class="text-[#9A3412]/65 font-medium">Your pet is pampered in 3 easy steps.</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+
+        <div class="clay-card bg-white p-8 text-center relative">
+          <div class="font-heading text-6xl font-bold text-[#F97316]/15 absolute top-4 right-5" aria-hidden="true">01</div>
+          <div class="w-16 h-16 rounded-2xl bg-[#2563EB] flex items-center justify-center mx-auto mb-5">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          </div>
+          <h3 class="font-heading font-semibold text-[#9A3412] text-xl mb-2">Pick a Date</h3>
+          <p class="text-[#9A3412]/60 text-sm leading-relaxed">Choose your service, date, and time slot from our live availability calendar.</p>
+        </div>
+
+        <div class="clay-card bg-white p-8 text-center relative">
+          <div class="font-heading text-6xl font-bold text-[#F97316]/15 absolute top-4 right-5" aria-hidden="true">02</div>
+          <div class="w-16 h-16 rounded-2xl bg-[#F97316] flex items-center justify-center mx-auto mb-5">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+          </div>
+          <h3 class="font-heading font-semibold text-[#9A3412] text-xl mb-2">Drop Off Your Pet</h3>
+          <p class="text-[#9A3412]/60 text-sm leading-relaxed">Bring your furry friend to our salon — we'll take care of them with love.</p>
+        </div>
+
+        <div class="clay-card bg-white p-8 text-center relative">
+          <div class="font-heading text-6xl font-bold text-[#F97316]/15 absolute top-4 right-5" aria-hidden="true">03</div>
+          <div class="w-16 h-16 rounded-2xl bg-green-500 flex items-center justify-center mx-auto mb-5">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <h3 class="font-heading font-semibold text-[#9A3412] text-xl mb-2">Pick Up &amp; Wag!</h3>
+          <p class="text-[#9A3412]/60 text-sm leading-relaxed">Get a text when they're ready. Your pet will look and smell amazing — guaranteed.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section id="reviews" class="py-16 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-12">
+        <h2 class="font-heading text-3xl sm:text-4xl font-bold text-[#9A3412] mb-3">Happy Pet Parents</h2>
+        <p class="text-[#9A3412]/65 font-medium">Don't take our word for it — hear from our furry fan club.</p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+        <div class="clay-card bg-white p-6">
+          <div class="flex gap-0.5 mb-3" aria-label="5 out of 5 stars">
+            <svg class="w-4 h-4 text-[#F97316]" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-[#F97316]" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-[#F97316]" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-[#F97316]" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-[#F97316]" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <p class="text-[#9A3412]/70 text-sm leading-relaxed mb-4">"Mochi came home looking like a show dog! The groomers are so gentle and patient. She actually looks forward to her appointments now."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-[#F97316]/15 flex items-center justify-center font-heading font-bold text-[#F97316]" aria-hidden="true">S</div>
+            <div>
+              <p class="font-semibold text-[#9A3412] text-sm">Sarah M.</p>
+              <p class="text-[#9A3412]/45 text-xs">Mochi's mom</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="clay-card bg-[#FFF7ED] p-6">
+          <div class="flex gap-0.5 mb-3" aria-label="5 out of 5 stars">
+            <svg class="w-4 h-4 text-[#F97316]" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-[#F97316]" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-[#F97316]" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-[#F97316]" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-[#F97316]" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <p class="text-[#9A3412]/70 text-sm leading-relaxed mb-4">"Bruno is an anxious rescue and every other salon stressed him out. The team here was incredible — patient, calm, professional. Worth every penny."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-[#2563EB]/12 flex items-center justify-center font-heading font-bold text-[#2563EB]" aria-hidden="true">J</div>
+            <div>
+              <p class="font-semibold text-[#9A3412] text-sm">James T.</p>
+              <p class="text-[#9A3412]/45 text-xs">Bruno's dad</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="clay-card bg-white p-6">
+          <div class="flex gap-0.5 mb-3" aria-label="5 out of 5 stars">
+            <svg class="w-4 h-4 text-[#F97316]" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-[#F97316]" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-[#F97316]" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-[#F97316]" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-[#F97316]" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <p class="text-[#9A3412]/70 text-sm leading-relaxed mb-4">"Tried 4 groomers and this is the only one my cat Luna tolerates. The team is incredibly gentle and experienced with cats. Highly recommend!"</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center font-heading font-bold text-purple-600" aria-hidden="true">A</div>
+            <div>
+              <p class="font-semibold text-[#9A3412] text-sm">Amy K.</p>
+              <p class="text-[#9A3412]/45 text-xs">Luna's mom</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Booking Form -->
+  <section id="book" class="py-16 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-2xl mx-auto">
+      <div class="clay-card bg-white p-8 sm:p-10">
+        <div class="text-center mb-8">
+          <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-[#F97316]/10 mb-4">
+            <svg class="w-8 h-8 text-[#F97316]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          </div>
+          <h2 class="font-heading text-3xl font-bold text-[#9A3412] mb-2">Book Your Session</h2>
+          <p class="text-[#9A3412]/60 font-medium text-sm">Fill in the details and we'll confirm within the hour — no payment upfront.</p>
+        </div>
+
+        <form id="booking-form" class="space-y-4" onsubmit="handleBooking(event)" novalidate>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label for="owner-name" class="block text-sm font-semibold text-[#9A3412] mb-1.5">Your Name</label>
+              <input id="owner-name" type="text" placeholder="Jane Smith" autocomplete="name" class="clay-input w-full px-4 py-3 text-[#9A3412] placeholder-[#9A3412]/35 bg-white text-sm" required />
+            </div>
+            <div>
+              <label for="phone" class="block text-sm font-semibold text-[#9A3412] mb-1.5">Phone Number</label>
+              <input id="phone" type="tel" placeholder="+1 (555) 000-0000" autocomplete="tel" class="clay-input w-full px-4 py-3 text-[#9A3412] placeholder-[#9A3412]/35 bg-white text-sm" required />
+            </div>
+          </div>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label for="pet-name" class="block text-sm font-semibold text-[#9A3412] mb-1.5">Pet's Name</label>
+              <input id="pet-name" type="text" placeholder="Buddy" class="clay-input w-full px-4 py-3 text-[#9A3412] placeholder-[#9A3412]/35 bg-white text-sm" required />
+            </div>
+            <div>
+              <label for="pet-type" class="block text-sm font-semibold text-[#9A3412] mb-1.5">Pet Type</label>
+              <select id="pet-type" class="clay-input w-full px-4 py-3 text-[#9A3412] bg-white text-sm cursor-pointer" required>
+                <option value="">Select type...</option>
+                <option>Dog</option>
+                <option>Cat</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label for="service" class="block text-sm font-semibold text-[#9A3412] mb-1.5">Service</label>
+              <select id="service" class="clay-input w-full px-4 py-3 text-[#9A3412] bg-white text-sm cursor-pointer" required>
+                <option value="">Select service...</option>
+                <option>Full Groom</option>
+                <option>Bath &amp; Dry</option>
+                <option>Nail Trim</option>
+                <option>Puppy Package</option>
+              </select>
+            </div>
+            <div>
+              <label for="date" class="block text-sm font-semibold text-[#9A3412] mb-1.5">Preferred Date</label>
+              <input id="date" type="date" class="clay-input w-full px-4 py-3 text-[#9A3412] bg-white text-sm cursor-pointer" required />
+            </div>
+          </div>
+          <div>
+            <label for="notes" class="block text-sm font-semibold text-[#9A3412] mb-1.5">
+              Notes <span class="font-normal text-[#9A3412]/45">(optional)</span>
+            </label>
+            <textarea id="notes" rows="3" placeholder="Allergies, special requests, or anything we should know..." class="clay-input w-full px-4 py-3 text-[#9A3412] placeholder-[#9A3412]/35 bg-white text-sm resize-none"></textarea>
+          </div>
+          <button type="submit" id="submit-btn" class="clay-btn bg-[#2563EB] text-white font-heading font-semibold text-lg py-4 w-full cursor-pointer">
+            Confirm Booking
+          </button>
+          <p class="text-center text-xs text-[#9A3412]/45 font-medium">No payment needed upfront. We'll text you a confirmation within 1 hour.</p>
+        </form>
+
+        <!-- Success state -->
+        <div id="success-msg" class="hidden text-center py-6">
+          <div class="w-16 h-16 rounded-2xl bg-green-100 flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <h3 class="font-heading font-bold text-[#9A3412] text-2xl mb-2">Booking Received!</h3>
+          <p class="text-[#9A3412]/60 text-sm">We'll confirm your appointment by text within 1 hour. See you soon!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-10 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-6xl mx-auto">
+      <div class="clay-card bg-[#9A3412] p-8 text-center">
+        <div class="flex items-center justify-center gap-2 mb-2">
+          <svg class="w-8 h-8" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+            <ellipse cx="18" cy="23" rx="7" ry="5.5" fill="white" opacity="0.9"/>
+            <circle cx="13" cy="16.5" r="2.5" fill="white" opacity="0.9"/>
+            <circle cx="23" cy="16.5" r="2.5" fill="white" opacity="0.9"/>
+            <ellipse cx="18" cy="14" rx="2.5" ry="3" fill="white" opacity="0.9"/>
+          </svg>
+          <span class="font-heading font-bold text-2xl text-white">Pawfect<span class="text-[#FB923C]">.</span></span>
+        </div>
+        <p class="text-white/60 text-sm mb-5">Bringing joy, one groom at a time.</p>
+        <div class="flex justify-center flex-wrap gap-6 text-white/55 text-sm font-medium mb-6">
+          <a href="#services" class="hover:text-white transition-colors duration-200 cursor-pointer">Services</a>
+          <a href="#how-it-works" class="hover:text-white transition-colors duration-200 cursor-pointer">How It Works</a>
+          <a href="#reviews" class="hover:text-white transition-colors duration-200 cursor-pointer">Reviews</a>
+          <a href="#book" class="hover:text-white transition-colors duration-200 cursor-pointer">Book Now</a>
+        </div>
+        <p class="text-white/35 text-xs">&copy; 2026 Pawfect Grooming. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Set min date to today
+    const dateInput = document.getElementById('date');
+    if (dateInput) {
+      dateInput.min = new Date().toISOString().split('T')[0];
+    }
+
+    function handleBooking(e) {
+      e.preventDefault();
+      const btn = document.getElementById('submit-btn');
+      btn.disabled = true;
+      btn.textContent = 'Confirming...';
+      setTimeout(() => {
+        document.getElementById('booking-form').style.display = 'none';
+        document.getElementById('success-msg').classList.remove('hidden');
+      }, 1200);
+    }
+  </script>
+</body>
+</html>
