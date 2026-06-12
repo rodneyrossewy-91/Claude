@@ -1,0 +1,184 @@
+@import "tailwindcss";
+
+@theme {
+  --color-white: #FFFFFF;
+  --color-anthracite: #1F2937;
+  --color-blue-deep: #1E3A8A;
+  --color-blue-light: #3B82F6;
+  --color-yellow: #FBBF24;
+  --color-gray-light: #F3F4F6;
+  --color-gray-medium: #E5E7EB;
+
+  --font-sans: "Inter", system-ui, sans-serif;
+
+  --animate-fade-up: fade-up 0.6s ease-out forwards;
+  --animate-fade-in: fade-in 0.5s ease-out forwards;
+  --animate-brush: brush-sweep 0.4s ease-out forwards;
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes brush-sweep {
+  from { transform: scaleX(0); transform-origin: left; }
+  to { transform: scaleX(1); transform-origin: left; }
+}
+
+@keyframes slide-in-left {
+  from { opacity: 0; transform: translateX(-40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes paint-drip {
+  0% { height: 0; }
+  100% { height: 100%; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #FFFFFF;
+  color: #1F2937;
+  font-family: "Inter", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Paint brush cursor highlight */
+::selection {
+  background-color: #FBBF24;
+  color: #1F2937;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F3F4F6;
+}
+::-webkit-scrollbar-thumb {
+  background: #1E3A8A;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #FBBF24;
+}
+
+/* Paint brush divider SVG */
+.brush-divider {
+  position: relative;
+  overflow: hidden;
+}
+
+.brush-divider::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 60' preserveAspectRatio='none'%3E%3Cpath d='M0,40 C240,60 480,0 720,30 C960,60 1200,10 1440,35 L1440,60 L0,60 Z' fill='%23FFFFFF'/%3E%3C/svg%3E") no-repeat bottom;
+  background-size: cover;
+}
+
+/* Card hover effect */
+.service-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(30, 58, 138, 0.05) 0%, rgba(251, 191, 36, 0.1) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 0;
+}
+
+.service-card:hover::before {
+  opacity: 1;
+}
+
+.service-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 60px rgba(30, 58, 138, 0.15);
+}
+
+/* Yellow underline animation */
+.hover-underline {
+  position: relative;
+}
+
+.hover-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #FBBF24;
+  transition: width 0.3s ease;
+}
+
+.hover-underline:hover::after {
+  width: 100%;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #1E3A8A 0%, #FBBF24 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Paint stroke background decoration */
+.paint-stroke-bg {
+  position: relative;
+}
+
+.paint-stroke-bg::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -5%;
+  right: -5%;
+  height: 40%;
+  background: rgba(251, 191, 36, 0.15);
+  transform: rotate(-1deg) translateY(-50%);
+  z-index: -1;
+  border-radius: 4px;
+}
+
+/* Loading animation */
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Lightbox */
+.lightbox-overlay {
+  backdrop-filter: blur(8px);
+}
