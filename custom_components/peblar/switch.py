@@ -33,6 +33,7 @@ class PeblarSmartChargingSwitch(
 
     _attr_has_entity_name = True
     _attr_name = "Smart Charging"
+    _attr_icon = "mdi:ev-station"
 
     def __init__(
         self,

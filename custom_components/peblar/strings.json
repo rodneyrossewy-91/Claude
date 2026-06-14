@@ -1,5 +1,6 @@
 {
   "config": {
+    "title": "Peblar",
     "step": {
       "user": {
         "title": "Peblar EV Charger",
@@ -7,13 +8,18 @@
         "data": {
           "host": "IP address or hostname",
           "api_key": "API key"
+        },
+        "data_description": {
+          "host": "Hostname or IP address of your Peblar charger (e.g. 192.168.1.100)",
+          "api_key": "API key for authenticating with the charger's local REST API"
         }
       }
     },
     "error": {
       "cannot_connect": "Unable to connect to the Peblar charger. Check the IP address and ensure the charger is online.",
       "invalid_auth": "Invalid API key. Check the key in the Peblar app.",
-      "unknown": "Unexpected error. See the Home Assistant log for details."
+      "unknown": "Unexpected error. See the Home Assistant log for details.",
+      "already_configured": "A Peblar charger with this serial number is already configured."
     },
     "abort": {
       "already_configured": "This Peblar charger is already configured."
