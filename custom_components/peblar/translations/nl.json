@@ -1,0 +1,22 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Peblar laadpaal",
+        "description": "Voer het IP-adres en de API-sleutel van uw Peblar laadpaal in. De API-sleutel kunt u vinden in de Peblar app onder Instellingen > API.",
+        "data": {
+          "host": "IP-adres of hostnaam",
+          "api_key": "API-sleutel"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Kan geen verbinding maken met de Peblar laadpaal. Controleer het IP-adres en zorg dat de laadpaal online is.",
+      "invalid_auth": "Ongeldige API-sleutel. Controleer de sleutel in de Peblar app.",
+      "unknown": "Onverwachte fout. Bekijk het Home Assistant logboek voor meer informatie."
+    },
+    "abort": {
+      "already_configured": "Deze Peblar laadpaal is al geconfigureerd."
+    }
+  }
+}

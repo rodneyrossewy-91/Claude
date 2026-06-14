@@ -1,0 +1,22 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Peblar EV Charger",
+        "description": "Enter the IP address and API key of your Peblar charger. The API key can be found in the Peblar app under Settings > API.",
+        "data": {
+          "host": "IP address or hostname",
+          "api_key": "API key"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Unable to connect to the Peblar charger. Check the IP address and ensure the charger is online.",
+      "invalid_auth": "Invalid API key. Check the key in the Peblar app.",
+      "unknown": "Unexpected error. See the Home Assistant log for details."
+    },
+    "abort": {
+      "already_configured": "This Peblar charger is already configured."
+    }
+  }
+}
