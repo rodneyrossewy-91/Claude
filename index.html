@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pawfect Grooming - Professional Pet Grooming</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange:    #F97316;
+      --orange2:   #FB923C;
+      --blue:      #2563EB;
+      --bg:        #FFF7ED;
+      --text:      #9A3412;
+      --text-muted:#9A3412cc;
+      --white:     #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    h1, h2, h3, h4, .logo-text, .btn, .step-num {
+      font-family: 'Fredoka', sans-serif;
+    }
+
+    /* ── Layout helpers ── */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .text-center { text-align: center; }
+    .flex { display: flex; }
+    .flex-center { display: flex; align-items: center; justify-content: center; }
+    .flex-between { display: flex; align-items: center; justify-content: space-between; }
+    .gap-2 { gap: 8px; }
+    .gap-3 { gap: 12px; }
+    .gap-4 { gap: 16px; }
+    .gap-6 { gap: 24px; }
+    .hidden { display: none; }
+
+    /* ── Clay system ── */
+    .clay {
+      border: 3px solid rgba(0,0,0,0.07);
+      border-radius: 20px;
+      box-shadow: 0 8px 28px rgba(249,115,22,0.13), inset 0 1px 0 rgba(255,255,255,0.75);
+      transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+    }
+    .clay:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 42px rgba(249,115,22,0.2), inset 0 1px 0 rgba(255,255,255,0.75);
+    }
+    .clay-sm {
+      border: 3px solid rgba(0,0,0,0.07);
+      border-radius: 14px;
+      box-shadow: 0 6px 20px rgba(249,115,22,0.12), inset 0 1px 0 rgba(255,255,255,0.7);
+    }
+
+    /* ── Buttons ── */
+    .btn {
+      display: inline-block;
+      padding: 11px 24px;
+      border-radius: 14px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      border: 3px solid rgba(0,0,0,0.1);
+      text-decoration: none;
+      transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+      text-align: center;
+      white-space: nowrap;
+    }
+    .btn-blue {
+      background: var(--blue);
+      color: #fff;
+      box-shadow: 0 6px 18px rgba(37,99,235,0.35), inset 0 1px 0 rgba(255,255,255,0.2);
+    }
+    .btn-blue:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(37,99,235,0.45);
+    }
+    .btn-blue:active { transform: translateY(1px); }
+    .btn-orange {
+      background: var(--orange);
+      color: #fff;
+      box-shadow: 0 6px 18px rgba(249,115,22,0.35), inset 0 1px 0 rgba(255,255,255,0.2);
+    }
+    .btn-orange:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(249,115,22,0.45); }
+    .btn-lg { padding: 16px 32px; font-size: 18px; width: 100%; }
+
+    /* ── Form inputs ── */
+    .input, select, textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 3px solid rgba(249,115,22,0.25);
+      border-radius: 12px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 15px;
+      color: var(--text);
+      background: #fff;
+      box-shadow: inset 0 2px 6px rgba(0,0,0,0.04);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    .input::placeholder, textarea::placeholder { color: rgba(154,52,18,0.35); }
+    .input:focus, select:focus, textarea:focus {
+      border-color: var(--orange);
+      box-shadow: 0 0 0 3px rgba(249,115,22,0.18), inset 0 2px 6px rgba(0,0,0,0.04);
+    }
+    select { cursor: pointer; }
+    textarea { resize: none; }
+
+    /* ── Navbar ── */
+    .nav-wrap {
+      position: fixed;
+      top: 16px; left: 16px; right: 16px;
+      z-index: 100;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .nav {
+      background: rgba(255,255,255,0.92);
+      border: 2px solid rgba(255,255,255,0.85);
+      border-radius: 18px;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 8px 32px rgba(249,115,22,0.1), inset 0 1px 0 rgba(255,255,255,0.9);
+      padding: 12px 20px;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; }
+    .nav-logo svg { width: 36px; height: 36px; flex-shrink: 0; }
+    .logo-text { font-size: 22px; font-weight: 700; color: var(--text); }
+    .logo-dot { color: var(--orange); }
+    .nav-links { display: flex; gap: 24px; }
+    .nav-links a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--orange); }
+
+    /* ── Hero ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 20px 64px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-blob {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      filter: blur(60px);
+    }
+    .hero-blob-1 { width: 280px; height: 280px; background: rgba(249,115,22,0.1); top: 80px; left: 0; }
+    .hero-blob-2 { width: 320px; height: 320px; background: rgba(37,99,235,0.06); bottom: 60px; right: 0; }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(249,115,22,0.1);
+      border: 1.5px solid rgba(249,115,22,0.25);
+      border-radius: 999px;
+      padding: 6px 16px;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    .hero-badge svg { width: 16px; height: 16px; flex-shrink: 0; }
+    h1 { font-size: clamp(36px, 5vw, 60px); line-height: 1.15; font-weight: 700; margin-bottom: 18px; }
+    .h1-accent { color: var(--orange); }
+    .hero-sub { font-size: 17px; font-weight: 500; color: rgba(154,52,18,0.7); max-width: 480px; line-height: 1.65; margin-bottom: 32px; }
+    .quick-book { background: #fff; padding: 20px; margin-bottom: 28px; max-width: 420px; }
+    .quick-book p { font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 14px; margin-bottom: 12px; }
+    .quick-row { display: flex; gap: 10px; }
+    .quick-row select { flex: 1; }
+    .trust-chips { display: flex; flex-wrap: wrap; gap: 16px; }
+    .chip { display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600; color: rgba(154,52,18,0.65); }
+    .chip svg { width: 18px; height: 18px; flex-shrink: 0; color: var(--orange); }
+
+    /* hero visual */
+    .hero-visual { display: flex; justify-content: center; align-items: center; position: relative; }
+    .hero-card { background: #fff; padding: 24px; width: 272px; position: relative; z-index: 2; }
+    .pet-illo {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(249,115,22,0.15), rgba(251,146,60,0.25));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      overflow: hidden;
+    }
+    .pet-illo svg { width: 176px; height: 176px; }
+    .hero-card-label { text-align: center; font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 18px; }
+    .stars { display: flex; justify-content: center; gap: 2px; margin-top: 4px; }
+    .stars svg { width: 16px; height: 16px; color: var(--orange); }
+    .float-badge {
+      position: absolute;
+      background: #fff;
+      border: 3px solid rgba(0,0,0,0.07);
+      border-radius: 16px;
+      box-shadow: 0 6px 20px rgba(249,115,22,0.12);
+      padding: 10px 14px;
+      z-index: 3;
+    }
+    .float-badge-top { top: -12px; right: -20px; }
+    .float-badge-bottom { bottom: -12px; left: -20px; background: var(--orange); }
+    .float-inner { display: flex; align-items: center; gap: 8px; }
+    .float-dot { width: 32px; height: 32px; border-radius: 50%; background: #dcfce7; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .float-dot svg { width: 16px; height: 16px; }
+    .float-label { font-weight: 700; font-size: 13px; }
+    .float-sub { font-size: 12px; color: rgba(154,52,18,0.55); }
+    .float-label-white { font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 14px; color: #fff; }
+
+    /* ── Section headings ── */
+    section { padding: 72px 20px; }
+    .section-head { text-align: center; margin-bottom: 48px; }
+    .section-head h2 { font-size: clamp(28px, 4vw, 40px); font-weight: 700; margin-bottom: 10px; }
+    .section-head p { font-size: 16px; font-weight: 500; color: rgba(154,52,18,0.65); max-width: 500px; margin: 0 auto; }
+
+    /* ── Services ── */
+    .service-card { background: #fff; padding: 24px; cursor: pointer; }
+    .service-card.accent { background: var(--orange); }
+    .service-icon {
+      width: 56px; height: 56px;
+      border-radius: 16px;
+      background: var(--bg);
+      border: 2px solid rgba(249,115,22,0.18);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 16px;
+      flex-shrink: 0;
+    }
+    .service-icon svg { width: 28px; height: 28px; color: var(--orange); }
+    .service-icon.white-bg { background: rgba(255,255,255,0.2); border-color: rgba(255,255,255,0.3); }
+    .service-icon.white-bg svg { color: #fff; }
+    .service-card h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+    .service-card.accent h3 { color: #fff; }
+    .service-card p { font-size: 14px; color: rgba(154,52,18,0.62); line-height: 1.6; }
+    .service-card.accent p { color: rgba(255,255,255,0.8); }
+    .price { font-family: 'Fredoka', sans-serif; font-weight: 700; font-size: 16px; color: var(--orange); margin-top: 12px; }
+    .service-card.accent .price { color: #fff; }
+
+    /* ── How it works ── */
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .step-card { background: #fff; padding: 32px; text-align: center; position: relative; }
+    .step-num { position: absolute; top: 16px; right: 20px; font-size: 56px; font-weight: 700; color: rgba(249,115,22,0.12); line-height: 1; }
+    .step-icon {
+      width: 64px; height: 64px;
+      border-radius: 18px;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px;
+    }
+    .step-icon svg { width: 32px; height: 32px; color: #fff; }
+    .step-icon.blue { background: var(--blue); box-shadow: 0 6px 18px rgba(37,99,235,0.3); }
+    .step-icon.orange { background: var(--orange); box-shadow: 0 6px 18px rgba(249,115,22,0.3); }
+    .step-icon.green { background: #22c55e; box-shadow: 0 6px 18px rgba(34,197,94,0.3); }
+    .step-card h3 { font-size: 20px; font-weight: 600; margin-bottom: 8px; }
+    .step-card p { font-size: 14px; color: rgba(154,52,18,0.62); line-height: 1.6; }
+
+    /* ── Testimonials ── */
+    .review-card { background: #fff; padding: 24px; }
+    .review-card.tinted { background: var(--bg); }
+    .review-stars { display: flex; gap: 2px; margin-bottom: 12px; }
+    .review-stars svg { width: 16px; height: 16px; color: var(--orange); }
+    .review-text { font-size: 14px; color: rgba(154,52,18,0.7); line-height: 1.65; margin-bottom: 16px; }
+    .reviewer { display: flex; align-items: center; gap: 12px; }
+    .avatar {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+    .av-orange { background: rgba(249,115,22,0.15); color: var(--orange); }
+    .av-blue   { background: rgba(37,99,235,0.1);  color: var(--blue); }
+    .av-purple { background: #f3e8ff; color: #7c3aed; }
+    .reviewer-name { font-weight: 600; font-size: 14px; }
+    .reviewer-sub { font-size: 12px; color: rgba(154,52,18,0.45); }
+
+    /* ── Booking ── */
+    .book-wrap { max-width: 680px; margin: 0 auto; }
+    .book-card { background: #fff; padding: 48px 40px; }
+    .book-icon-wrap {
+      width: 64px; height: 64px;
+      border-radius: 18px;
+      background: rgba(249,115,22,0.1);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 16px;
+    }
+    .book-icon-wrap svg { width: 32px; height: 32px; color: var(--orange); }
+    .book-card h2 { font-size: 32px; font-weight: 700; margin-bottom: 8px; }
+    .book-card .subtitle { font-size: 15px; font-weight: 500; color: rgba(154,52,18,0.6); margin-bottom: 32px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { margin-bottom: 16px; }
+    label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+    .form-note { text-align: center; font-size: 13px; color: rgba(154,52,18,0.45); margin-top: 12px; font-weight: 500; }
+    .success { text-align: center; padding: 24px 0; }
+    .success-icon {
+      width: 64px; height: 64px;
+      border-radius: 18px;
+      background: #dcfce7;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 16px;
+    }
+    .success-icon svg { width: 32px; height: 32px; color: #16a34a; }
+    .success h3 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+    .success p { font-size: 15px; color: rgba(154,52,18,0.6); }
+
+    /* ── Footer ── */
+    .footer { padding: 40px 20px; }
+    .footer-card { background: var(--text); border-radius: 20px; border: 3px solid rgba(0,0,0,0.1); box-shadow: 0 8px 28px rgba(0,0,0,0.15); padding: 40px; text-align: center; }
+    .footer-logo { display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 8px; }
+    .footer-logo svg { width: 32px; height: 32px; }
+    .footer-logo span { font-family: 'Fredoka', sans-serif; font-weight: 700; font-size: 24px; color: #fff; }
+    .footer-tagline { color: rgba(255,255,255,0.55); font-size: 14px; margin-bottom: 24px; }
+    .footer-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 24px; margin-bottom: 24px; }
+    .footer-links a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
+    .footer-links a:hover { color: #fff; }
+    .footer-copy { color: rgba(255,255,255,0.3); font-size: 12px; }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .grid-2 { grid-template-columns: 1fr; }
+      .hero-visual { display: none; }
+      .grid-4 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .grid-3, .steps { grid-template-columns: 1fr; }
+      .grid-4 { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .form-row { grid-template-columns: 1fr; }
+      .quick-row { flex-direction: column; }
+      .book-card { padding: 28px 20px; }
+      h1 { font-size: 36px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <div class="nav-wrap">
+    <nav class="nav flex-between">
+      <a href="#" class="nav-logo" aria-label="Pawfect Grooming home">
+        <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="18" cy="18" r="18" fill="#FFF7ED"/>
+          <ellipse cx="18" cy="23" rx="7" ry="5.5" fill="#F97316"/>
+          <circle cx="13" cy="16.5" r="2.5" fill="#F97316"/>
+          <circle cx="23" cy="16.5" r="2.5" fill="#F97316"/>
+          <ellipse cx="18" cy="14" rx="2.5" ry="3" fill="#F97316"/>
+        </svg>
+        <span class="logo-text">Pawfect<span class="logo-dot">.</span></span>
+      </a>
+      <div class="nav-links">
+        <a href="#services">Services</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#reviews">Reviews</a>
+      </div>
+      <a href="#book" class="btn btn-blue" style="padding:10px 20px;font-size:15px;">Book Now</a>
+    </nav>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-blob hero-blob-1" aria-hidden="true"></div>
+    <div class="hero-blob hero-blob-2" aria-hidden="true"></div>
+    <div class="container" style="width:100%;">
+      <div class="grid-2">
+        <!-- Copy -->
+        <div>
+          <div class="hero-badge">
+            <svg viewBox="0 0 20 20" fill="currentColor" style="color:var(--orange)" aria-hidden="true">
+              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+            </svg>
+            Trusted by 2,000+ pet families
+          </div>
+
+          <h1>Your Pet Deserves<br/><span class="h1-accent">The Best Groom</span><br/>In Town</h1>
+
+          <p class="hero-sub">Professional grooming for dogs and cats — baths, haircuts, nail trims and more. We treat every pet like our own. Happy paws, happy tails!</p>
+
+          <div class="quick-book clay">
+            <p>Quick-book a session</p>
+            <div class="quick-row">
+              <label for="quick-service" style="display:none">Select service</label>
+              <select id="quick-service">
+                <option value="">Select service...</option>
+                <option>Full Groom</option>
+                <option>Bath &amp; Dry</option>
+                <option>Nail Trim</option>
+                <option>Puppy Package</option>
+              </select>
+              <a href="#book" class="btn btn-blue">Book Now</a>
+            </div>
+          </div>
+
+          <div class="trust-chips">
+            <div class="chip">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              Certified Groomers
+            </div>
+            <div class="chip">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+              Pet-Safe Products
+            </div>
+            <div class="chip">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              Same-Day Slots
+            </div>
+          </div>
+        </div>
+
+        <!-- Visual -->
+        <div class="hero-visual">
+          <div class="hero-card clay">
+            <div class="pet-illo">
+              <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustrated happy dog">
+                <ellipse cx="100" cy="135" rx="48" ry="38" fill="#FB923C"/>
+                <circle cx="100" cy="82" r="34" fill="#FB923C"/>
+                <ellipse cx="73" cy="62" rx="13" ry="19" fill="#F97316" transform="rotate(-15 73 62)"/>
+                <ellipse cx="127" cy="62" rx="13" ry="19" fill="#F97316" transform="rotate(15 127 62)"/>
+                <circle cx="90" cy="77" r="5" fill="#9A3412"/>
+                <circle cx="110" cy="77" r="5" fill="#9A3412"/>
+                <circle cx="91.5" cy="75.5" r="1.8" fill="white"/>
+                <circle cx="111.5" cy="75.5" r="1.8" fill="white"/>
+                <ellipse cx="100" cy="88" rx="7" ry="5" fill="#9A3412"/>
+                <circle cx="98" cy="87" r="1.8" fill="white"/>
+                <path d="M89 95 Q100 106 111 95" stroke="#9A3412" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                <path d="M146 128 Q168 104 158 82" stroke="#F97316" stroke-width="11" stroke-linecap="round" fill="none"/>
+                <rect x="66" y="158" width="17" height="24" rx="8" fill="#F97316"/>
+                <rect x="88" y="162" width="17" height="20" rx="8" fill="#F97316"/>
+                <rect x="110" y="162" width="17" height="20" rx="8" fill="#F97316"/>
+              </svg>
+            </div>
+            <p class="hero-card-label">Just Groomed!</p>
+            <div class="stars" aria-label="5 star rating">
+              <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            </div>
+          </div>
+          <div class="float-badge float-badge-top">
+            <div class="float-inner">
+              <div class="float-dot">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              </div>
+              <div>
+                <div class="float-label">Available Today</div>
+                <div class="float-sub">3 slots left</div>
+              </div>
+            </div>
+          </div>
+          <div class="float-badge float-badge-bottom">
+            <span class="float-label-white">2,000+ Happy Paws</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services">
+    <div class="container">
+      <div class="section-head">
+        <h2>Our Grooming Services</h2>
+        <p>From a quick tidy-up to a full spa day — everything your furry friend needs.</p>
+      </div>
+      <div class="grid-4">
+
+        <div class="service-card clay">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+          </div>
+          <h3>Full Groom</h3>
+          <p>Bath, blow-dry, haircut, nail trim, ear clean, and bandana. The complete package!</p>
+          <div class="price">From $55</div>
+        </div>
+
+        <div class="service-card clay">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          </div>
+          <h3>Bath &amp; Dry</h3>
+          <p>Shampoo, conditioner &amp; blow-dry with pet-safe fragrant products. Fresh and fluffy!</p>
+          <div class="price">From $35</div>
+        </div>
+
+        <div class="service-card clay">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
+          </div>
+          <h3>Nail Trim</h3>
+          <p>Stress-free nail clipping and filing. Includes paw pad moisturizer. Quick &amp; gentle.</p>
+          <div class="price">From $18</div>
+        </div>
+
+        <div class="service-card clay accent">
+          <div class="service-icon white-bg">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+          </div>
+          <h3>Puppy Package</h3>
+          <p>A gentle first-groom experience designed to build positive associations for life.</p>
+          <div class="price">From $40</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section id="how-it-works" style="background:rgba(249,115,22,0.04);">
+    <div class="container">
+      <div class="section-head">
+        <h2>How It Works</h2>
+        <p>Your pet is pampered in 3 easy steps.</p>
+      </div>
+      <div class="steps">
+
+        <div class="step-card clay">
+          <div class="step-num" aria-hidden="true">01</div>
+          <div class="step-icon blue">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          </div>
+          <h3>Pick a Date</h3>
+          <p>Choose your service, date, and time slot from our live availability calendar.</p>
+        </div>
+
+        <div class="step-card clay">
+          <div class="step-num" aria-hidden="true">02</div>
+          <div class="step-icon orange">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+          </div>
+          <h3>Drop Off Your Pet</h3>
+          <p>Bring your furry friend to our salon — we'll take care of them with love.</p>
+        </div>
+
+        <div class="step-card clay">
+          <div class="step-num" aria-hidden="true">03</div>
+          <div class="step-icon green">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <h3>Pick Up &amp; Wag!</h3>
+          <p>Get a text when they're ready. Your pet will look and smell amazing — guaranteed.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section id="reviews">
+    <div class="container">
+      <div class="section-head">
+        <h2>Happy Pet Parents</h2>
+        <p>Don't take our word for it — hear from our furry fan club.</p>
+      </div>
+      <div class="grid-3">
+
+        <div class="review-card clay">
+          <div class="review-stars" aria-label="5 out of 5 stars">
+            <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <p class="review-text">"Mochi came home looking like a show dog! The groomers are so gentle and patient. She actually looks forward to her appointments now."</p>
+          <div class="reviewer">
+            <div class="avatar av-orange" aria-hidden="true">S</div>
+            <div>
+              <div class="reviewer-name">Sarah M.</div>
+              <div class="reviewer-sub">Mochi's mom</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card clay tinted">
+          <div class="review-stars" aria-label="5 out of 5 stars">
+            <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <p class="review-text">"Bruno is an anxious rescue and every other salon stressed him out. The team here was incredible — patient, calm, professional. Worth every penny."</p>
+          <div class="reviewer">
+            <div class="avatar av-blue" aria-hidden="true">J</div>
+            <div>
+              <div class="reviewer-name">James T.</div>
+              <div class="reviewer-sub">Bruno's dad</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card clay">
+          <div class="review-stars" aria-label="5 out of 5 stars">
+            <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <p class="review-text">"Tried 4 groomers and this is the only one my cat Luna tolerates. The team is incredibly gentle and experienced with cats. Highly recommend!"</p>
+          <div class="reviewer">
+            <div class="avatar av-purple" aria-hidden="true">A</div>
+            <div>
+              <div class="reviewer-name">Amy K.</div>
+              <div class="reviewer-sub">Luna's mom</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Booking -->
+  <section id="book" style="background:rgba(249,115,22,0.04);">
+    <div class="container">
+      <div class="book-wrap">
+        <div class="book-card clay">
+          <div class="text-center">
+            <div class="book-icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            </div>
+            <h2>Book Your Session</h2>
+            <p class="subtitle">Fill in the details and we'll confirm within the hour — no payment upfront.</p>
+          </div>
+
+          <form id="booking-form" onsubmit="handleBooking(event)" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="owner-name">Your Name</label>
+                <input id="owner-name" type="text" class="input" placeholder="Jane Smith" autocomplete="name" required />
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input id="phone" type="tel" class="input" placeholder="+1 (555) 000-0000" autocomplete="tel" required />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="pet-name">Pet's Name</label>
+                <input id="pet-name" type="text" class="input" placeholder="Buddy" required />
+              </div>
+              <div class="form-group">
+                <label for="pet-type">Pet Type</label>
+                <select id="pet-type" required>
+                  <option value="">Select type...</option>
+                  <option>Dog</option>
+                  <option>Cat</option>
+                  <option>Other</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="service">Service</label>
+                <select id="service" required>
+                  <option value="">Select service...</option>
+                  <option>Full Groom</option>
+                  <option>Bath &amp; Dry</option>
+                  <option>Nail Trim</option>
+                  <option>Puppy Package</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="date">Preferred Date</label>
+                <input id="date" type="date" class="input" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="notes">Notes <span style="font-weight:400;color:rgba(154,52,18,0.45)">(optional)</span></label>
+              <textarea id="notes" class="input" rows="3" placeholder="Allergies, special requests, or anything we should know..."></textarea>
+            </div>
+            <button type="submit" id="submit-btn" class="btn btn-blue btn-lg" style="margin-top:8px;">
+              Confirm Booking
+            </button>
+            <p class="form-note">No payment needed upfront. We'll text you a confirmation within 1 hour.</p>
+          </form>
+
+          <div id="success-msg" class="success hidden">
+            <div class="success-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            <h3>Booking Received!</h3>
+            <p>We'll confirm your appointment by text within 1 hour. See you soon!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-card">
+        <div class="footer-logo">
+          <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <ellipse cx="18" cy="23" rx="7" ry="5.5" fill="white" opacity="0.9"/>
+            <circle cx="13" cy="16.5" r="2.5" fill="white" opacity="0.9"/>
+            <circle cx="23" cy="16.5" r="2.5" fill="white" opacity="0.9"/>
+            <ellipse cx="18" cy="14" rx="2.5" ry="3" fill="white" opacity="0.9"/>
+          </svg>
+          <span>Pawfect<span style="color:var(--orange2)">.</span></span>
+        </div>
+        <p class="footer-tagline">Bringing joy, one groom at a time.</p>
+        <div class="footer-links">
+          <a href="#services">Services</a>
+          <a href="#how-it-works">How It Works</a>
+          <a href="#reviews">Reviews</a>
+          <a href="#book">Book Now</a>
+        </div>
+        <p class="footer-copy">&copy; 2026 Pawfect Grooming. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('date').min = new Date().toISOString().split('T')[0];
+
+    function handleBooking(e) {
+      e.preventDefault();
+      var btn = document.getElementById('submit-btn');
+      btn.disabled = true;
+      btn.textContent = 'Confirming...';
+      setTimeout(function() {
+        document.getElementById('booking-form').style.display = 'none';
+        document.getElementById('success-msg').classList.remove('hidden');
+      }, 1200);
+    }
+  </script>
+</body>
+</html>
