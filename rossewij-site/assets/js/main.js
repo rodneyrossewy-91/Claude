@@ -46,13 +46,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* ---------- Project filter ---------- */
   const filterBtns = document.querySelectorAll("[data-filter]");
-  const projectCards = document.querySelectorAll("[data-category]");
   filterBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
       filterBtns.forEach((b) => b.classList.remove("is-active"));
       btn.classList.add("is-active");
       const filter = btn.dataset.filter;
-      projectCards.forEach((card) => {
+      document.querySelectorAll("[data-category]").forEach((card) => {
         const match = filter === "alle" || card.dataset.category === filter;
         card.classList.toggle("is-hidden", !match);
       });

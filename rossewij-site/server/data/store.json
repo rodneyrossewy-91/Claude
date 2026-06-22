@@ -1,0 +1,13 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "rossewij",
+      "passwordHash": "$2b$10$eN.1kN64ONuWf3lHl.Vh.ufp/Fh96trTh.jfY2WWyZlNAVwPtcQnO"
+    }
+  ],
+  "projects": [],
+  "offers": [],
+  "nextProjectId": 1,
+  "nextOfferId": 1
+}

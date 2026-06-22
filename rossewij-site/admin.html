@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Beheer | Schilderbedrijf Rossewij</title>
+<meta name="robots" content="noindex, nofollow" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/css/style.v3.css" />
+<style>
+  .admin-shell { max-width: 1080px; margin: 0 auto; padding: 110px 20px 80px; }
+  .admin-panel { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); padding: 32px; margin-bottom: 40px; }
+  .admin-panel h2 { font-size: 1.3rem; margin-bottom: 18px; }
+  .offer-row { display: grid; grid-template-columns: 2fr 1fr 1fr auto; gap: 12px; align-items: end; margin-bottom: 12px; }
+  .offer-row .field { margin: 0; }
+  .admin-list { display: flex; flex-direction: column; gap: 14px; margin-top: 20px; }
+  .admin-list-item { display: flex; justify-content: space-between; align-items: center; gap: 16px; border: 1px solid var(--line); border-radius: 10px; padding: 14px 18px; }
+  .admin-list-item .meta { font-size: 0.85rem; color: var(--text-soft); }
+  .btn-danger { background: transparent; border: 1px solid #d64545; color: #d64545; border-radius: 8px; padding: 8px 14px; font-size: 0.85rem; cursor: pointer; }
+  .btn-danger:hover { background: #d64545; color: var(--white); }
+  .total-line { display: flex; justify-content: space-between; padding: 6px 0; font-size: 0.95rem; }
+  .total-line.grand { font-weight: 700; font-size: 1.15rem; color: var(--navy); border-top: 1px solid var(--line); margin-top: 8px; padding-top: 12px; }
+  .admin-topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+</style>
+</head>
+<body>
+<main id="main">
+  <div class="admin-shell">
+    <div class="admin-topbar">
+      <div>
+        <p class="eyebrow">Beheerdersportaal</p>
+        <h1 style="font-size:1.8rem; margin-top:6px;">Welkom, <span id="admin-username">...</span></h1>
+      </div>
+      <button type="button" id="logout-btn" class="btn btn-outline" style="border-color:var(--navy); color:var(--navy);">Uitloggen</button>
+    </div>
+
+    <!-- Projecten -->
+    <section class="admin-panel">
+      <h2>Project toevoegen</h2>
+      <p style="color:var(--text-soft); font-size:0.92rem; margin-bottom:18px;">Geüploade projecten verschijnen direct op de projectenpagina van de website.</p>
+      <form id="project-form" enctype="multipart/form-data">
+        <div class="form-grid">
+          <div class="field">
+            <label for="p-title">Projecttitel</label>
+            <input type="text" id="p-title" name="title" required />
+          </div>
+          <div class="field">
+            <label for="p-location">Locatie</label>
+            <input type="text" id="p-location" name="location" required />
+          </div>
+          <div class="field">
+            <label for="p-category">Categorie</label>
+            <select id="p-category" name="category" required>
+              <option value="binnen">Binnen</option>
+              <option value="buiten">Buiten</option>
+              <option value="zakelijk">Zakelijk</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="p-description">Korte beschrijving</label>
+            <input type="text" id="p-description" name="description" />
+          </div>
+          <div class="field">
+            <label for="p-before">Foto voor</label>
+            <input type="file" id="p-before" name="beforeImage" accept="image/*" />
+          </div>
+          <div class="field">
+            <label for="p-after">Foto na</label>
+            <input type="file" id="p-after" name="afterImage" accept="image/*" />
+          </div>
+        </div>
+        <p id="project-error" style="color:#d64545; font-size:0.88rem; margin-top:14px; display:none;"></p>
+        <button type="submit" class="btn btn-primary" style="margin-top:18px;">Project plaatsen</button>
+      </form>
+      <div id="project-list" class="admin-list"></div>
+    </section>
+
+    <!-- Offerte calculator -->
+    <section class="admin-panel">
+      <h2>Offerte-calculator</h2>
+      <p style="color:var(--text-soft); font-size:0.92rem; margin-bottom:18px;">Bereken een offerte op basis van oppervlakte, materiaalkosten en reiskosten/uren.</p>
+      <form id="offer-form">
+        <div class="form-grid">
+          <div class="field">
+            <label for="o-naam">Klantnaam</label>
+            <input type="text" id="o-naam" name="klantNaam" required />
+          </div>
+          <div class="field">
+            <label for="o-adres">Adres</label>
+            <input type="text" id="o-adres" name="adres" />
+          </div>
+        </div>
+
+        <h3 style="margin:22px 0 12px; font-size:1.02rem;">Oppervlakte per onderdeel</h3>
+        <div id="offer-rows"></div>
+        <button type="button" id="add-row" class="btn btn-outline" style="border-color:var(--navy); color:var(--navy); margin-top:4px;">+ Regel toevoegen</button>
+
+        <div class="form-grid" style="margin-top:22px;">
+          <div class="field">
+            <label for="o-materiaal">Materiaalkosten (€)</label>
+            <input type="number" id="o-materiaal" name="materiaalkosten" min="0" step="0.01" value="0" />
+          </div>
+          <div class="field">
+            <label for="o-reis">Reiskosten / uren (€)</label>
+            <input type="number" id="o-reis" name="reiskosten" min="0" step="0.01" value="0" />
+          </div>
+        </div>
+
+        <div style="margin-top:24px; background:var(--gray-light); border-radius:10px; padding:18px 22px;">
+          <div class="total-line"><span>Arbeid (oppervlakte × prijs/m²)</span><span id="total-arbeid">€ 0,00</span></div>
+          <div class="total-line"><span>Materiaalkosten</span><span id="total-materiaal">€ 0,00</span></div>
+          <div class="total-line"><span>Reiskosten / uren</span><span id="total-reis">€ 0,00</span></div>
+          <div class="total-line grand"><span>Totaal</span><span id="total-totaal">€ 0,00</span></div>
+        </div>
+
+        <p id="offer-error" style="color:#d64545; font-size:0.88rem; margin-top:14px; display:none;"></p>
+        <button type="submit" class="btn btn-primary" style="margin-top:18px;">Offerte opslaan</button>
+      </form>
+      <div id="offer-list" class="admin-list"></div>
+    </section>
+  </div>
+</main>
+
+<template id="offer-row-template">
+  <div class="offer-row">
+    <div class="field">
+      <label>Omschrijving</label>
+      <input type="text" class="row-omschrijving" placeholder="bv. Gevel voorzijde" />
+    </div>
+    <div class="field">
+      <label>m²</label>
+      <input type="number" class="row-m2" min="0" step="0.1" value="0" />
+    </div>
+    <div class="field">
+      <label>Prijs/m² (€)</label>
+      <input type="number" class="row-prijs" min="0" step="0.01" value="0" />
+    </div>
+    <button type="button" class="btn-danger remove-row">Verwijder</button>
+  </div>
+</template>
+
+<script>
+  const fmt = (n) => "€ " + n.toFixed(2).replace(".", ",");
+
+  async function checkSession() {
+    const res = await fetch("/api/session");
+    const data = await res.json();
+    if (!data.loggedIn) {
+      window.location.href = "login.html";
+      return;
+    }
+    document.getElementById("admin-username").textContent = data.username;
+  }
+
+  document.getElementById("logout-btn").addEventListener("click", async () => {
+    await fetch("/api/logout", { method: "POST" });
+    window.location.href = "login.html";
+  });
+
+  /* ---------- Projecten ---------- */
+
+  async function loadProjects() {
+    const res = await fetch("/api/projects");
+    const projects = await res.json();
+    const list = document.getElementById("project-list");
+    list.innerHTML = "";
+    projects.forEach((p) => {
+      const item = document.createElement("div");
+      item.className = "admin-list-item";
+      item.innerHTML = `
+        <div>
+          <strong>${p.title}</strong>
+          <div class="meta">${p.location} · ${p.category}</div>
+        </div>
+        <button type="button" class="btn-danger" data-id="${p.id}">Verwijder</button>
+      `;
+      item.querySelector("button").addEventListener("click", async () => {
+        if (!confirm("Dit project verwijderen?")) return;
+        await fetch(`/api/projects/${p.id}`, { method: "DELETE" });
+        loadProjects();
+      });
+      list.appendChild(item);
+    });
+  }
+
+  document.getElementById("project-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const errorEl = document.getElementById("project-error");
+    errorEl.style.display = "none";
+    const form = e.target;
+    const formData = new FormData(form);
+    try {
+      const res = await fetch("/api/projects", { method: "POST", body: formData });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Opslaan mislukt.");
+      form.reset();
+      loadProjects();
+    } catch (err) {
+      errorEl.textContent = err.message;
+      errorEl.style.display = "block";
+    }
+  });
+
+  /* ---------- Offerte calculator ---------- */
+
+  const rowsContainer = document.getElementById("offer-rows");
+  const rowTemplate = document.getElementById("offer-row-template");
+
+  function addRow() {
+    const row = rowTemplate.content.firstElementChild.cloneNode(true);
+    row.querySelectorAll("input").forEach((input) => input.addEventListener("input", recalc));
+    row.querySelector(".remove-row").addEventListener("click", () => {
+      row.remove();
+      recalc();
+    });
+    rowsContainer.appendChild(row);
+  }
+
+  function recalc() {
+    let arbeid = 0;
+    rowsContainer.querySelectorAll(".offer-row").forEach((row) => {
+      const m2 = parseFloat(row.querySelector(".row-m2").value) || 0;
+      const prijs = parseFloat(row.querySelector(".row-prijs").value) || 0;
+      arbeid += m2 * prijs;
+    });
+    const materiaal = parseFloat(document.getElementById("o-materiaal").value) || 0;
+    const reis = parseFloat(document.getElementById("o-reis").value) || 0;
+    const totaal = arbeid + materiaal + reis;
+    document.getElementById("total-arbeid").textContent = fmt(arbeid);
+    document.getElementById("total-materiaal").textContent = fmt(materiaal);
+    document.getElementById("total-reis").textContent = fmt(reis);
+    document.getElementById("total-totaal").textContent = fmt(totaal);
+  }
+
+  document.getElementById("add-row").addEventListener("click", addRow);
+  document.getElementById("o-materiaal").addEventListener("input", recalc);
+  document.getElementById("o-reis").addEventListener("input", recalc);
+  addRow();
+
+  async function loadOffers() {
+    const res = await fetch("/api/offers");
+    const offers = await res.json();
+    const list = document.getElementById("offer-list");
+    list.innerHTML = "";
+    offers.forEach((o) => {
+      const item = document.createElement("div");
+      item.className = "admin-list-item";
+      item.innerHTML = `
+        <div>
+          <strong>${o.klantNaam}</strong>
+          <div class="meta">${o.adres || ""} · Totaal: ${fmt(o.totaal)}</div>
+        </div>
+        <button type="button" class="btn-danger" data-id="${o.id}">Verwijder</button>
+      `;
+      item.querySelector("button").addEventListener("click", async () => {
+        if (!confirm("Deze offerte verwijderen?")) return;
+        await fetch(`/api/offers/${o.id}`, { method: "DELETE" });
+        loadOffers();
+      });
+      list.appendChild(item);
+    });
+  }
+
+  document.getElementById("offer-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const errorEl = document.getElementById("offer-error");
+    errorEl.style.display = "none";
+    const items = Array.from(rowsContainer.querySelectorAll(".offer-row")).map((row) => ({
+      omschrijving: row.querySelector(".row-omschrijving").value,
+      m2: parseFloat(row.querySelector(".row-m2").value) || 0,
+      prijsPerM2: parseFloat(row.querySelector(".row-prijs").value) || 0,
+    }));
+    const payload = {
+      klantNaam: document.getElementById("o-naam").value,
+      adres: document.getElementById("o-adres").value,
+      items,
+      materiaalkosten: parseFloat(document.getElementById("o-materiaal").value) || 0,
+      reiskosten: parseFloat(document.getElementById("o-reis").value) || 0,
+    };
+    try {
+      const res = await fetch("/api/offers", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Opslaan mislukt.");
+      e.target.reset();
+      rowsContainer.innerHTML = "";
+      addRow();
+      recalc();
+      loadOffers();
+    } catch (err) {
+      errorEl.textContent = err.message;
+      errorEl.style.display = "block";
+    }
+  });
+
+  checkSession();
+  loadProjects();
+  loadOffers();
+</script>
+</body>
+</html>

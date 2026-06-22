@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Inloggen | Schilderbedrijf Rossewij</title>
+<meta name="robots" content="noindex, nofollow" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/css/style.v3.css" />
+</head>
+<body>
+<main id="main">
+  <section style="min-height:100vh; display:flex; align-items:center; justify-content:center; padding:40px 20px; background:linear-gradient(125deg, var(--navy-dark) 0%, var(--navy) 55%, var(--navy-soft) 100%);">
+    <div class="reveal is-visible" style="width:100%; max-width:400px; background:var(--white); border-radius:var(--radius); box-shadow:var(--shadow); padding:40px 32px;">
+      <a href="index.html" class="logo" style="justify-content:center; display:flex; margin-bottom:24px;">
+        <span class="logo-mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21l4-1 11-11-3-3L4 17l-1 4z"/><path d="M14 7l3 3"/></svg></span>
+        Rossewij <span>Schilderwerk</span>
+      </a>
+      <h1 style="font-size:1.4rem; text-align:center; margin-bottom:6px;">Beheerdersportaal</h1>
+      <p style="text-align:center; color:var(--text-soft); font-size:0.92rem; margin-bottom:24px;">Log in om projecten te beheren en offertes te berekenen.</p>
+      <form id="login-form" novalidate>
+        <div class="field">
+          <label for="username">Gebruikersnaam</label>
+          <input type="text" id="username" name="username" autocomplete="username" required />
+        </div>
+        <div class="field" style="margin-top:16px;">
+          <label for="password">Wachtwoord</label>
+          <input type="password" id="password" name="password" autocomplete="current-password" required />
+        </div>
+        <p id="login-error" style="color:#d64545; font-size:0.88rem; margin-top:14px; display:none;"></p>
+        <button type="submit" class="btn btn-primary" style="width:100%; margin-top:22px; justify-content:center;">Inloggen</button>
+      </form>
+    </div>
+  </section>
+</main>
+<script>
+  document.getElementById("login-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const errorEl = document.getElementById("login-error");
+    errorEl.style.display = "none";
+    const username = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value;
+    try {
+      const res = await fetch("/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Inloggen mislukt.");
+      window.location.href = "admin.html";
+    } catch (err) {
+      errorEl.textContent = err.message;
+      errorEl.style.display = "block";
+    }
+  });
+</script>
+</body>
+</html>

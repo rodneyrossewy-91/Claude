@@ -84,7 +84,7 @@
         <button type="button" class="filter-btn" data-filter="zakelijk">Zakelijk</button>
       </div>
 
-      <div class="project-grid">
+      <div class="project-grid" id="project-grid">
         <article class="project-card reveal" data-category="renovatie">
           <div class="before-after">
             <figure><div class="img-illustration" role="img" aria-label="Illustratie: Woonkamer voor renovatie" style="width:100%; height:100%; background:linear-gradient(135deg, #c7ccd4, #aab0bb); display:flex; align-items:center; justify-content:center;"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#5b6472" stroke-width="1.5"><path d="M4 18v-4a2 2 0 012-2h12a2 2 0 012 2v4" stroke-linejoin="round"/><path d="M2 18h20" stroke-linecap="round"/><path d="M6 12V8a2 2 0 012-2h8a2 2 0 012 2v4"/></svg></div><figcaption>Voor</figcaption></figure>
@@ -238,6 +238,7 @@
       <ul>
         <li><a href="privacyverklaring.html">Privacyverklaring</a></li>
         <li><a href="algemene-voorwaarden.html">Algemene voorwaarden</a></li>
+        <li><a href="login.html">Inloggen</a></li>
       </ul>
     </div>
   </div>
@@ -266,5 +267,36 @@
 </div>
 
 <script src="assets/js/main.js"></script>
+<script>
+  fetch("/api/projects")
+    .then((res) => (res.ok ? res.json() : []))
+    .then((projects) => {
+      if (!projects.length) return;
+      const grid = document.getElementById("project-grid");
+      const figure = (url, label, fallbackLabel) =>
+        url
+          ? `<figure><img src="${url}" alt="${label}" style="width:100%; height:100%; object-fit:cover;" /><figcaption>${fallbackLabel}</figcaption></figure>`
+          : `<figure><div class="img-illustration" role="img" aria-label="${label}" style="width:100%; height:100%; background:linear-gradient(135deg, #c7ccd4, #aab0bb); display:flex; align-items:center; justify-content:center;"></div><figcaption>${fallbackLabel}</figcaption></figure>`;
+      projects.forEach((p) => {
+        const article = document.createElement("article");
+        article.className = "project-card reveal is-visible";
+        article.dataset.category = p.category;
+        article.innerHTML = `
+          <div class="before-after">
+            ${figure(p.beforeImageUrl, `${p.title} voor`, "Voor")}
+            ${figure(p.afterImageUrl, `${p.title} na`, "Na")}
+          </div>
+          <div class="project-body">
+            <h3>${p.title}</h3>
+            <p class="project-meta"><span>${p.location}</span></p>
+            <div class="project-tags"><span>${p.category}</span></div>
+            ${p.description ? `<p>${p.description}</p>` : ""}
+          </div>
+        `;
+        grid.prepend(article);
+      });
+    })
+    .catch(() => {});
+</script>
 </body>
 </html>
