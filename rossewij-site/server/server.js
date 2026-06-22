@@ -9,7 +9,9 @@ const db = require("./lib/db");
 const { requireAuth } = require("./middleware/auth");
 
 const SITE_ROOT = path.join(__dirname, "..");
-const UPLOADS_DIR = path.join(__dirname, "uploads");
+const UPLOADS_DIR = process.env.DATA_DIR
+  ? path.join(process.env.DATA_DIR, "uploads")
+  : path.join(__dirname, "uploads");
 fs.mkdirSync(UPLOADS_DIR, { recursive: true });
 
 const app = express();
