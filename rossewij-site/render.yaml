@@ -2,16 +2,10 @@ services:
   - type: web
     name: rossewij-site
     runtime: node
-    plan: starter
+    plan: free
     rootDir: rossewij-site/server
     buildCommand: npm install
     startCommand: npm start
     envVars:
       - key: SESSION_SECRET
         generateValue: true
-      - key: DATA_DIR
-        value: /var/data
-    disk:
-      name: rossewij-data
-      mountPath: /var/data
-      sizeGB: 1
