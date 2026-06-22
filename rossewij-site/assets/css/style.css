@@ -145,14 +145,13 @@ section { padding: 90px 0; }
   color: var(--white);
   font-size: 0.82rem;
   font-weight: 500;
-}
-.trust-bar .container {
   display: flex;
   gap: 28px;
   flex-wrap: wrap;
   justify-content: center;
-  padding-top: 8px;
-  padding-bottom: 8px;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 8px 24px;
 }
 .trust-bar li { display: flex; align-items: center; gap: 6px; }
 .trust-bar svg { color: var(--orange); flex-shrink: 0; }
@@ -747,7 +746,7 @@ section { padding: 90px 0; }
   .contact-grid { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; gap: 32px; }
   .cta-banner { padding: 36px 22px; }
-  .trust-bar .container { gap: 10px 18px; font-size: 0.72rem; row-gap: 6px; }
+  .trust-bar { gap: 10px 18px; font-size: 0.72rem; row-gap: 6px; }
   .trust-bar svg { display: none; }
   .mobile-cta-bar { display: flex; }
   body { padding-bottom: 70px; }
