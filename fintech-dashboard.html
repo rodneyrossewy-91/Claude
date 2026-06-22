@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="nl" class="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Fintech Dashboard</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Fira+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+  tailwind.config = {
+    darkMode: 'class',
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['Fira Sans', 'sans-serif'],
+          mono: ['Fira Code', 'monospace'],
+        },
+        colors: {
+          primary: '#0F172A',
+          secondary: '#1E293B',
+          accent: '#22C55E',
+          surface: '#020617',
+        },
+      },
+    },
+  };
+</script>
+<style>
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+  ::selection { background: #22C55E; color: #020617; }
+</style>
+</head>
+<body class="bg-surface text-slate-50 font-sans antialiased">
+
+<div class="min-h-screen flex">
+
+  <!-- Sidebar -->
+  <aside class="hidden md:flex md:w-64 flex-col gap-1 border-r border-white/10 bg-primary/60 p-4 shrink-0">
+    <div class="flex items-center gap-2 px-2 py-3 mb-4">
+      <svg class="size-8 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="M3 12l2-2 4 4 8-8 4 4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span class="font-semibold text-lg">Nordis</span>
+    </div>
+
+    <nav class="flex flex-col gap-1" aria-label="Hoofdnavigatie">
+      <a href="#" class="flex items-center gap-3 rounded-lg px-3 py-2 bg-secondary text-slate-50 cursor-pointer" aria-current="page">
+        <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+        <span>Overzicht</span>
+      </a>
+      <a href="#" class="flex items-center gap-3 rounded-lg px-3 py-2 text-slate-300 hover:bg-secondary/60 hover:text-slate-50 transition-colors duration-200 cursor-pointer">
+        <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>Transacties</span>
+      </a>
+      <a href="#" class="flex items-center gap-3 rounded-lg px-3 py-2 text-slate-300 hover:bg-secondary/60 hover:text-slate-50 transition-colors duration-200 cursor-pointer">
+        <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+        <span>Kaarten</span>
+      </a>
+      <a href="#" class="flex items-center gap-3 rounded-lg px-3 py-2 text-slate-300 hover:bg-secondary/60 hover:text-slate-50 transition-colors duration-200 cursor-pointer">
+        <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3" stroke-linecap="round"/></svg>
+        <span>Rapporten</span>
+      </a>
+      <a href="#" class="flex items-center gap-3 rounded-lg px-3 py-2 text-slate-300 hover:bg-secondary/60 hover:text-slate-50 transition-colors duration-200 cursor-pointer">
+        <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 15a3 3 0 100-6 3 3 0 000 6z"/><path d="M19.4 13a7.97 7.97 0 000-2l2-1.6-2-3.4-2.3.9a8 8 0 00-1.7-1l-.3-2.4h-3.8l-.3 2.4a8 8 0 00-1.7 1l-2.3-.9-2 3.4L6.6 11a7.97 7.97 0 000 2l-2 1.6 2 3.4 2.3-.9c.5.4 1.1.8 1.7 1l.3 2.4h3.8l.3-2.4a8 8 0 001.7-1l2.3.9 2-3.4-2-1.6z"/></svg>
+        <span>Instellingen</span>
+      </a>
+    </nav>
+
+    <div class="mt-auto flex items-center gap-3 rounded-lg px-3 py-3 bg-secondary/40">
+      <img src="https://i.pravatar.cc/64?img=12" alt="Profielfoto van Mara de Vries" class="size-9 rounded-full object-cover" />
+      <div class="min-w-0">
+        <p class="text-sm font-medium truncate">Mara de Vries</p>
+        <p class="text-xs text-slate-400 truncate">mara@nordis.nl</p>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <div class="flex-1 flex flex-col min-w-0">
+
+    <!-- Top navbar -->
+    <header class="sticky top-0 z-20 flex items-center justify-between gap-4 border-b border-white/10 bg-surface/80 backdrop-blur px-4 sm:px-6 lg:px-8 py-4">
+      <div>
+        <h1 class="text-xl font-semibold">Overzicht</h1>
+        <p class="text-sm text-slate-400">Welkom terug, hier is je financiële status vandaag.</p>
+      </div>
+      <div class="flex items-center gap-3">
+        <button type="button" aria-label="Notificaties" class="relative size-10 grid place-items-center rounded-lg border border-white/10 text-slate-300 hover:text-slate-50 hover:bg-secondary/60 transition-colors duration-200 cursor-pointer focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2">
+          <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9" stroke-linecap="round" stroke-linejoin="round"/><path d="M13.7 21a2 2 0 01-3.4 0" stroke-linecap="round"/></svg>
+          <span class="absolute top-1.5 right-1.5 size-2 rounded-full bg-accent"></span>
+        </button>
+        <button type="button" class="hidden sm:inline-flex items-center gap-2 rounded-lg bg-accent text-slate-950 font-medium px-4 py-2 hover:bg-accent/90 transition-colors duration-200 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">
+          <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg>
+          Nieuwe overboeking
+        </button>
+      </div>
+    </header>
+
+    <main class="flex-1 px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+
+      <!-- KPI cards -->
+      <section aria-label="Kerncijfers" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        <div class="rounded-xl border border-white/10 bg-primary/50 p-5">
+          <p class="text-sm text-slate-400">Totaal saldo</p>
+          <p class="mt-2 text-2xl font-semibold font-mono">€482.930</p>
+          <p class="mt-1 text-sm text-accent flex items-center gap-1">
+            <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12l5-5 4 4 5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            +4,2% deze maand
+          </p>
+        </div>
+        <div class="rounded-xl border border-white/10 bg-primary/50 p-5">
+          <p class="text-sm text-slate-400">Inkomsten</p>
+          <p class="mt-2 text-2xl font-semibold font-mono">€128.400</p>
+          <p class="mt-1 text-sm text-accent flex items-center gap-1">
+            <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12l5-5 4 4 5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            +1,8% deze week
+          </p>
+        </div>
+        <div class="rounded-xl border border-white/10 bg-primary/50 p-5">
+          <p class="text-sm text-slate-400">Uitgaven</p>
+          <p class="mt-2 text-2xl font-semibold font-mono">€64.120</p>
+          <p class="mt-1 text-sm text-rose-400 flex items-center gap-1">
+            <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12l5 5 4-4 5 5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            +2,1% deze week
+          </p>
+        </div>
+        <div class="rounded-xl border border-white/10 bg-primary/50 p-5">
+          <p class="text-sm text-slate-400">Actieve gebruikers</p>
+          <p class="mt-2 text-2xl font-semibold font-mono">12.847</p>
+          <p class="mt-1 text-sm text-accent flex items-center gap-1">
+            <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12l5-5 4 4 5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            +0,6% vandaag
+          </p>
+        </div>
+      </section>
+
+      <!-- Charts -->
+      <section aria-label="Grafieken" class="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
+        <div class="lg:col-span-2 rounded-xl border border-white/10 bg-primary/50 p-5">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="font-medium">Omzet trend</h2>
+            <span class="text-xs text-slate-400">Laatste 6 maanden</span>
+          </div>
+          <canvas id="revenueChart" height="220" role="img" aria-label="Lijngrafiek van omzettrend over de laatste 6 maanden"></canvas>
+          <table class="sr-only">
+            <caption>Omzet per maand</caption>
+            <thead><tr><th>Maand</th><th>Omzet (€)</th></tr></thead>
+            <tbody>
+              <tr><td>Jan</td><td>312.000</td></tr>
+              <tr><td>Feb</td><td>338.500</td></tr>
+              <tr><td>Mrt</td><td>356.200</td></tr>
+              <tr><td>Apr</td><td>349.800</td></tr>
+              <tr><td>Mei</td><td>402.100</td></tr>
+              <tr><td>Jun</td><td>428.930</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="rounded-xl border border-white/10 bg-primary/50 p-5">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="font-medium">Uitgaven per categorie</h2>
+          </div>
+          <canvas id="categoryChart" height="220" role="img" aria-label="Donutgrafiek van uitgaven verdeeld over categorieën"></canvas>
+          <table class="sr-only">
+            <caption>Uitgaven per categorie</caption>
+            <thead><tr><th>Categorie</th><th>Percentage</th></tr></thead>
+            <tbody>
+              <tr><td>Operationeel</td><td>42%</td></tr>
+              <tr><td>Marketing</td><td>23%</td></tr>
+              <tr><td>Personeel</td><td>27%</td></tr>
+              <tr><td>Overig</td><td>8%</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Transactions table -->
+      <section aria-label="Recente transacties" class="rounded-xl border border-white/10 bg-primary/50 overflow-hidden">
+        <div class="flex items-center justify-between p-5 pb-0">
+          <h2 class="font-medium">Recente transacties</h2>
+          <a href="#" class="text-sm text-accent hover:underline cursor-pointer">Alles bekijken</a>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm mt-4">
+            <caption class="sr-only">Lijst van recente transacties met naam, datum, bedrag en status</caption>
+            <thead>
+              <tr class="text-left text-slate-400 border-b border-white/10">
+                <th scope="col" class="font-normal px-5 py-3">Naam</th>
+                <th scope="col" class="font-normal px-5 py-3">Datum</th>
+                <th scope="col" class="font-normal px-5 py-3">Bedrag</th>
+                <th scope="col" class="font-normal px-5 py-3">Status</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-white/5">
+              <tr>
+                <td class="px-5 py-3">Stripe Payout</td>
+                <td class="px-5 py-3 text-slate-400">21 jun 2026</td>
+                <td class="px-5 py-3 font-mono text-accent">+€8.420,00</td>
+                <td class="px-5 py-3"><span class="inline-flex items-center rounded-full bg-accent/10 text-accent text-xs px-2.5 py-1">Voltooid</span></td>
+              </tr>
+              <tr>
+                <td class="px-5 py-3">AWS Facturering</td>
+                <td class="px-5 py-3 text-slate-400">20 jun 2026</td>
+                <td class="px-5 py-3 font-mono text-rose-400">-€1.240,50</td>
+                <td class="px-5 py-3"><span class="inline-flex items-center rounded-full bg-accent/10 text-accent text-xs px-2.5 py-1">Voltooid</span></td>
+              </tr>
+              <tr>
+                <td class="px-5 py-3">Payroll Juni</td>
+                <td class="px-5 py-3 text-slate-400">18 jun 2026</td>
+                <td class="px-5 py-3 font-mono text-rose-400">-€42.000,00</td>
+                <td class="px-5 py-3"><span class="inline-flex items-center rounded-full bg-amber-400/10 text-amber-400 text-xs px-2.5 py-1">In behandeling</span></td>
+              </tr>
+              <tr>
+                <td class="px-5 py-3">Klant terugbetaling</td>
+                <td class="px-5 py-3 text-slate-400">17 jun 2026</td>
+                <td class="px-5 py-3 font-mono text-rose-400">-€312,00</td>
+                <td class="px-5 py-3"><span class="inline-flex items-center rounded-full bg-accent/10 text-accent text-xs px-2.5 py-1">Voltooid</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<script>
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const baseAnim = reduceMotion ? false : { duration: 600 };
+
+  new Chart(document.getElementById('revenueChart'), {
+    type: 'line',
+    data: {
+      labels: ['Jan', 'Feb', 'Mrt', 'Apr', 'Mei', 'Jun'],
+      datasets: [{
+        label: 'Omzet',
+        data: [312000, 338500, 356200, 349800, 402100, 428930],
+        borderColor: '#0080FF',
+        backgroundColor: 'rgba(0,128,255,0.15)',
+        fill: true,
+        tension: 0.35,
+        pointBackgroundColor: '#0080FF',
+        pointRadius: 3,
+      }],
+    },
+    options: {
+      animation: baseAnim,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94A3B8' } },
+        y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94A3B8', callback: v => '€' + (v / 1000) + 'k' } },
+      },
+    },
+  });
+
+  new Chart(document.getElementById('categoryChart'), {
+    type: 'doughnut',
+    data: {
+      labels: ['Operationeel', 'Marketing', 'Personeel', 'Overig'],
+      datasets: [{
+        data: [42, 23, 27, 8],
+        backgroundColor: ['#22C55E', '#0080FF', '#F59E0B', '#64748B'],
+        borderColor: '#020617',
+        borderWidth: 2,
+      }],
+    },
+    options: {
+      animation: baseAnim,
+      plugins: { legend: { position: 'bottom', labels: { color: '#94A3B8', boxWidth: 12, padding: 12 } } },
+      cutout: '65%',
+    },
+  });
+</script>
+
+</body>
+</html>
