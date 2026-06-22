@@ -286,7 +286,7 @@ select:focus-visible,
   position: fixed;
   inset: 0;
   background: var(--charcoal);
-  z-index: 99;
+  z-index: 110;
   display: flex;
   flex-direction: column;
   justify-content: center;
