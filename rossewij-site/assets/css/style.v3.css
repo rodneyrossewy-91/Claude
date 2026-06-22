@@ -149,8 +149,6 @@ section { padding: 90px 0; }
   gap: 28px;
   flex-wrap: wrap;
   justify-content: center;
-  max-width: var(--container);
-  margin: 0 auto;
   padding: 8px 24px;
 }
 .trust-bar li { display: flex; align-items: center; gap: 6px; }
