@@ -305,17 +305,10 @@ section { padding: 90px 0; }
 }
 .hero-illustration {
   position: absolute;
-  right: 6%;
-  bottom: 110px;
+  inset: 0;
   z-index: 0;
-  width: 340px;
-  height: 420px;
-  border-radius: 20px;
   overflow: hidden;
   pointer-events: none;
-  box-shadow: 0 30px 60px -20px rgba(0,0,0,0.45);
-  -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,1) 12%, rgba(0,0,0,1) 100%);
-  mask-image: linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,1) 12%, rgba(0,0,0,1) 100%);
 }
 .hero-illustration img {
   width: 100%;
@@ -323,8 +316,11 @@ section { padding: 90px 0; }
   object-fit: cover;
   filter: saturate(1.05);
 }
-@media (max-width: 1100px) {
-  .hero-illustration { display: none; }
+.hero-illustration::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, rgba(15,30,55,0.96) 0%, rgba(15,30,55,0.82) 32%, rgba(15,30,55,0.42) 60%, rgba(15,30,55,0.18) 100%);
 }
 .hero-content { position: relative; z-index: 1; max-width: 680px; }
 .hero-content .eyebrow { color: var(--orange); }
