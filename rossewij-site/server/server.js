@@ -69,6 +69,43 @@ app.get("/api/session", (req, res) => {
   res.json({ loggedIn: true, username: req.session.username });
 });
 
+/* ---------- Foto's (Pexels proxy) ---------- */
+
+const PEXELS_API_KEY = process.env.PEXELS_API_KEY;
+const photoCache = new Map();
+const PHOTO_CACHE_TTL_MS = 60 * 60 * 1000;
+
+app.get("/api/photos", async (req, res) => {
+  if (!PEXELS_API_KEY) {
+    return res.status(503).json({ error: "Fotodienst niet geconfigureerd." });
+  }
+  const query = String(req.query.query || "").trim();
+  if (!query) {
+    return res.status(400).json({ error: "Parameter 'query' is verplicht." });
+  }
+  const perPage = Math.min(Number(req.query.per_page) || 5, 15);
+  const cacheKey = `${query}:${perPage}`;
+  const cached = photoCache.get(cacheKey);
+  if (cached && Date.now() - cached.timestamp < PHOTO_CACHE_TTL_MS) {
+    return res.json(cached.data);
+  }
+
+  try {
+    const response = await fetch(
+      `https://api.pexels.com/v1/search?query=${encodeURIComponent(query)}&per_page=${perPage}`,
+      { headers: { Authorization: PEXELS_API_KEY } }
+    );
+    if (!response.ok) {
+      return res.status(502).json({ error: "Fotodienst gaf een fout terug." });
+    }
+    const data = await response.json();
+    photoCache.set(cacheKey, { data, timestamp: Date.now() });
+    res.json(data);
+  } catch (err) {
+    res.status(502).json({ error: "Kon geen verbinding maken met fotodienst." });
+  }
+});
+
 /* ---------- Projects ---------- */
 
 app.get("/api/projects", (req, res) => {
