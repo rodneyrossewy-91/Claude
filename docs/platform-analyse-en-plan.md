@@ -244,3 +244,77 @@ A salesopdracht overnemen ✓ · B directe aanmelding ✓ · C offerte aanpassen
 **Dashboard**: tegels "Na de installatie" (wacht op finale controle, onboarding nodig, afgerond, terugbelacties, klanten met vragen, commerciële kansen); elke tegel opent het overzicht, en van daaruit open je het dossier.
 
 **Rechten (server-side)**: controle, onboarding en kansen: Administratie of Beheer. Vragenlijst: Beheer. Sales-bevestiging: rol sales via de persoonlijke link. Meekijken vanuit beheer: alleen lezen.
+
+## Onboarding als begeleid klantgesprek (oktober 2026)
+
+De ja/nee-vragenlijst (categorieën A–D) is vervangen door een stapsgewijze gesprekswizard. De aansluitflow en de scheiding tussen operationele status en onboardingstatus zijn ongewijzigd; het onboardinggesprek kan een aansluiting nooit blokkeren.
+
+**Opbouw van het scherm**
+- Bovenaan staat een klantkaart: klant, object, contactpersoon met belknop, datum van activering, installateur, afgenomen diensten en status.
+- Daaronder staat de voortgang per stap.
+- In het midden staat het gespreksvenster met voorbeeldtekst, dossiergegevens en snelle keuzes.
+- Onderaan staan de knoppen Vorige, Volgende, *Opslaan en later hervatten* en *Gesprek afronden*.
+- Alles wordt automatisch opgeslagen, ook de huidige stap (veld Stap), zodat het gesprek later bij dezelfde stap verder kan.
+
+**Stappen (standaard)**
+1. **Welkom en contactmoment**
+   - Komt het gesprek gelegen? Keuzes: ja / terugbelafspraak / andere contactpersoon / geen gehoor, voicemail of verkeerd nummer.
+   - Bevoegdheid vaststellen: de klant noemt het codewoord en de server controleert het (`controleerCodewoord`). Het codewoord komt nooit in de browser. Telefoonnummers van contactpersonen blijven afgeschermd tot de bevoegdheid is vastgesteld.
+2. **Installatie-ervaring**: vier uitkomsten. Bij een vraag, probleem of openstaand werk ontstaat automatisch een vervolgactie met afdeling, urgentie en notitie.
+3. **Meldkamerdienstverlening**
+   - Toont de werkelijk afgenomen diensten (actieve aansluitdiensten plus de afgesproken alarmopvolging).
+   - Drie controlepunten: alarm, ongewenst alarm en bereikbaarheid. Keuzes: besproken / uitleg gegeven / vervolgactie nodig / n.v.t. Er is ook een knop "Alles besproken en duidelijk".
+4. **Contactpersonen en alarmprocedure**
+   - Toont de contactpersonen in waarschuwingsvolgorde.
+   - Is iets onjuist, dan ontstaat een wijzigingsaanvraag (Wijzigingen, soort Waarschuwingsadressen, status Nieuw) in de bestaande autorisatieprocedure. Waarschuwingsgegevens worden nooit direct overschreven.
+5. **Behoefteanalyse**: adviserende vragen over alarmopvolging en videoverificatie. Ze worden verborgen als de klant die dienst al afneemt. Bij interesse ontstaat één commerciële kans per dienst, met een opvolgtaak voor sales.
+6. **Samenvatting en afronding**
+   - Er wordt automatisch een samenvatting opgesteld, die de medewerker kan corrigeren.
+   - Resultaten:
+     - Succesvol: alleen zonder open acties.
+     - Gedeeltelijk: alleen met een open actie.
+     - Terugbelafspraak: datum verplicht.
+     - Niet bereikbaar: de onboarding blijft open.
+   - Essentiële onderdelen moeten besproken zijn. Open commerciële kansen mogen blijven bestaan.
+
+**Centraal beheer (Instellingen → Onboardingvragen)**
+- Soorten onderdelen: Gesprekstekst, Controlepunt, Gesloten vraag, Open vraag, Actievraag en Commerciële vraag.
+- Per onderdeel in te stellen:
+  - stap en volgorde;
+  - toelichting of gesprekstekst;
+  - antwoorden;
+  - voorwaarde ("alleen na vraag X bij antwoord A | B");
+  - signaal: vervolgactie, wijziging gegevens, commerciële kans of bevoegdheid;
+  - afdeling, ook per antwoord;
+  - "niet tonen als de klant al afneemt";
+  - essentieel voor afronden.
+- Gespreksteksten vullen [medewerker], [klant], [contactpersoon], [installateur], [meldkamer], [aansluitnummer] en [acties] in.
+- Op een eigen regel tonen [diensten], [contactpersonen] en [identificatie] dossiergegevens.
+- Antwoorden bewaren de vraagtekst van toen, zodat latere wijzigingen de historie niet raken.
+
+**Geen dubbele taken**
+- Er is één automatische actie per vraag (veld `bron`).
+- Een open actie met dezelfde tekst wordt niet nog een keer aangemaakt.
+- Wijzigt het antwoord, dan vervalt de actie.
+- Een wijzigingsaanvraag wordt bijgewerkt zolang hij nog Nieuw is.
+- Per dienst is er één lopende kans.
+
+**Data**
+- Onboarding: velden Stap, Resultaat en Samenvatting.
+- Onboardingvragen: velden Toelichting, Verberg Bij Dienst en Afdeling, plus nieuwe type- en signaalopties.
+- De 15 oude ja/nee-vragen zijn vervangen door 21 onderdelen. Er waren nog geen gegeven antwoorden.
+
+**Getest** (tijdelijke ZZTEST-data, daarna verwijderd):
+- niet bereikbaar;
+- terugbelafspraak;
+- tevreden klant, snel afgerond;
+- probleem met een opvolgtaak bij Techniek;
+- onjuist contact: één wijzigingsaanvraag, die bij nieuwe tekst wordt bijgewerkt;
+- klant met alarmopvolging krijgt geen verkoopvraag;
+- interesse: één kans, ook na een gewijzigd antwoord;
+- open actie: alleen "gedeeltelijk afgerond";
+- codewoord juist en onjuist.
+
+Telstar (DETEC-2026-0023) is ongewijzigd en staat nog op Nog te bellen.
+
+**Open punt:** voor "Hoe bereikt de klant de juiste afdeling" staan in de applicatie alleen het meldkameradres (alarmcentrale@devision.nl) en de gegevens van het installatiebedrijf. Telefoonnummers van de administratie en de meldkamer kunnen in de toelichting van dat onderdeel worden aangevuld.
