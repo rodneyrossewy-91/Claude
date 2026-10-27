@@ -226,3 +226,21 @@ A salesopdracht overnemen ✓ · B directe aanmelding ✓ · C offerte aanpassen
 - Activeringspaneel in voorbereiding: alleen de checklistpunten "site aangemaakt" en "receiver/Site ID" (de rest na de installatie), Site ID / receiver / IP-poort, en "Na opslaan direct naar de monteur sturen" (standaard aan). Verstuurt alleen als de gegevens nieuw of gewijzigd zijn (vingerafdruk `paneel` in de terugkoppeling).
 - Monteur: in het dossier (stap Technische installatie) een groen blok met Site ID, receiver en IP/poort, of een melding dat ze nog komen.
 - Evalink: de site wordt nu nog handmatig aangemaakt. **Later:** via de Evalink-API de site (inactief) automatisch aanmaken en Site ID / receivergegevens terugschrijven. De velden (Extern systeem, Extern Id, Sync Status, Sync Fout, Laatste Sync, Bevestigingsbron "Systeemkoppeling") liggen al klaar. Gebruik dan de echte API-documentatie van Evalink, geen aannames.
+
+## Na de installatie: finale controle, klantonboarding en commerciële kansen
+
+**Bestaande flow ongewijzigd.** Fases, meldkamerwerkplek en activering blijven zoals ze waren. Eén extra voorwaarde: "Aansluiting actief" (de operationele vrijgave) kan pas na goedkeuring van de finale controle.
+
+1. Monteur levert op (Technisch gereed), zoals nu.
+2. **Sales** bevestigt in de werkomgeving de definitief geïnstalleerde componenten en extra diensten (blok "Controle na de installatie").
+3. **Administratie** (rol Administratie of Beheer) doet de **finale controle** in het aansluitdossier: 8 controlepunten (wie/wanneer), opmerking, Goedkeuren / Terug naar Sales / Terug naar monteur. Wordt opgeslagen als JSON in `Aanmeldingen.Finale Controle`, met historie. Terug naar de monteur zet de fase terug naar "Installatie in uitvoering", maar nooit als de aansluiting al operationeel is. Opnieuw opleveren of de bevestiging van sales zet de controle weer op "Te controleren".
+4. Na goedkeuring bevestigt een bevoegde medewerker "Aansluiting actief" (bestaande stap).
+5. Bij operationele status **Actief** start automatisch een **onboardingtaak** (tabel `Onboarding`, één per aanvraag). Een fout bij het aanmaken blokkeert de vrijgave nooit.
+6. **Onboarding** (menu): statussen Nog te bellen / Contactpoging uitgevoerd / Terugbellen gepland / In behandeling / Afgerond. In het belscherm: klant en contactpersoon met telefoon, vragenlijst per categorie met automatische opslag en een voortgangsbalk, belpogingen (Bereikt / Geen gehoor / Voicemail / Verkeerd nummer), notities, vervolgacties, terugbeldatum, verantwoordelijke en historie. Afronden kan pas als alle verplichte vragen zijn beantwoord. Gewijzigde antwoorden blijven in de historie staan.
+7. **Commerciële kansen** (tabel `Commerciele Kansen`): automatisch bij een signalerend antwoord (bijv. "behoefte aan alarmopvolging" = Ja) of met de hand. Ze staan in het aansluitdossier en het logboek, en de salesmedewerker krijgt een e-mail. Sales ziet ze in de werkomgeving en kan de status bijwerken. Er wordt nooit iets automatisch geactiveerd.
+
+**Vragenlijst** (Instellingen → Onboardingvragen, rol Beheer): vragen toevoegen, wijzigen, verwijderen of deactiveren; categorie en volgorde; verplicht/optioneel; type Ja/nee, Meerkeuze, Tekst of Opmerking; voorwaardelijk tonen (na vraag X bij antwoord Y); signaal (Klantvraag → open actie, Commerciële kans → opvolgtaak sales). Antwoorden bewaren een kopie van de vraagtekst. Bij de start gevuld met de standaardvragen A–D en vervolgvragen.
+
+**Dashboard**: tegels "Na de installatie" (wacht op finale controle, onboarding nodig, afgerond, terugbelacties, klanten met vragen, commerciële kansen); elke tegel opent het overzicht, en van daaruit open je het dossier.
+
+**Rechten (server-side)**: controle, onboarding en kansen: Administratie of Beheer. Vragenlijst: Beheer. Sales-bevestiging: rol sales via de persoonlijke link. Meekijken vanuit beheer: alleen lezen.
