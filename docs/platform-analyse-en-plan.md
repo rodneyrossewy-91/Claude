@@ -207,3 +207,11 @@ A salesopdracht overnemen ✓ · B directe aanmelding ✓ · C offerte aanpassen
 - Alleen voor de rol Beheer: keuzelijst "Bekijk als" rechtsboven.
 - **Rol / collega** (Meldkamer, Administratie, gebruikers uit Gebruikers en rollen): alleen een weergave van menu, startpagina en "Mijn werk". Handelingen en serverrechten blijven die van de beheerder.
 - **Partnermedewerker**: opent in een nieuw tabblad de werkomgeving precies zoals die medewerker hem ziet (eigen installatiebedrijf, eigen rol). Tijdelijke link van 2 uur (Beheersessie met "Alleen Lezen"). Alle wijzigende endpoints weigeren (`magWijzigen`), knoppen zijn verborgen en het meekijken wordt gelogd.
+
+## Partnerportaal
+
+- In de werkomgeving van het installatiebedrijf (formulier-app), alleen via de **persoonlijke link** van een medewerker met de schakelaar **Partnerportaal** (beheer → Medewerkers). Niet via de gedeelde partnerlink.
+- Tabbladen: Dashboard, Aanvragen (alle aanvragen van het eigen bedrijf, ook voor een monteur), Aansluitingen (operationele status, diensten, jaarwaarde), Wijzigingen (status van doorgegeven wijzigingen/opzeggingen) en Nieuwe aanvraag.
+- Dashboard: actieve aansluitingen met jaarwaarde, open offertes, in installatie, bij de meldkamer; "Vraagt aandacht" (beoordeling nodig, gegevens ontbreken, activering mislukt, offerte ≥14 dagen zonder reactie, akkoord zonder monteur ≥7 dagen); grafiek over 12 maanden; laatst gewijzigd.
+- Geen instellingen, tarieven, medewerkers of logboek. Acties blijven per rol (sales/monteur); het portaal geeft alleen extra inzage.
+- Endpoint `getPartnerportaal` filtert op het eigen bedrijf. `listMedewerkers` (bevat persoonlijke links) is nu alleen voor de rol Beheer.
