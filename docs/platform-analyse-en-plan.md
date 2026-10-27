@@ -193,3 +193,11 @@ Acht stappen, tussentijds opgeslagen en te hervatten: Opdracht · Klantgegevens 
 
 ### Testresultaten (live, testbedrijf ZZTEST, daarna verwijderd)
 A salesopdracht overnemen ✓ · B directe aanmelding ✓ · C offerte aanpassen v1→v2 ✓ · D afwijkende configuratie → beoordeling → goedkeuring met meerwerk ✓ · E opgeleverd = gereed voor activering, niet actief ✓ · F activering bevestigd, actieve diensten aangemaakt ✓ · G tussentijds opslaan en hervatten ✓ · H rapportage telt alleen operationeel actief ✓ · I idempotent, geen dubbele klant/aanvraag ✓ · J onvolledige oplevering en verkeerde rol geweigerd met duidelijke melding ✓. Toegang: ander installatiebedrijf 404, monteur kan geen akkoord of goedkeuring zetten, sales kan dossier niet wijzigen ✓. Mobiel (390 px) doorlopen ✓. Meldkamermails zijn in de test onderschept, niet verstuurd.
+
+## Meldkamerwerkplek en rollen (beheerportaal)
+
+- **Pagina Meldkamer** (werkbak): alle aansluitingen met operationele status *Gereed voor activering*, *Activering in behandeling* of *Activering mislukt*; filters Nieuw binnen, Mijn werk, In behandeling, Activering mislukt; oudste eerst met wachttijd, installateur/monteur, opgepakt door en checklistvoortgang.
+- **Activeringspaneel** bij de aanvraag: oppakken / loslaten / overnemen (oppakken zet de fase op *Wachten op bevestiging meldkamer*), checklist (site, receiver + Site ID, zones, contacten/codewoorden/regels, testmelding, looptest) met per vinkje wie en wanneer, Site ID, receiver-account, IP-adres/poort en aansluitnummer.
+- **Aansluiting actief** kan pas met complete checklist en Site ID (gecontroleerd op de server).
+- **Terugkoppeling** naar het installatiebedrijf (e-mail aan monteur, sales en aanmelder + zichtbaar in de werkomgeving): *Paneelgegevens* (Site ID, profiel, receiver, IP/poort), *Gegevens ontbreken* (optioneel dossier terug naar de monteur), *Activering mislukt* (operationele status), *Bericht*.
+- **Rollen** (tabel *Beheergebruikers*, beheerbaar onder Instellingen → Gebruikers en rollen): Beheer (alles), Meldkamer (werkbak, aanvragen, activeren), Administratie (aanvragen, aansluitbeheer, wijzigingen, logboek, statussen). Menu per rol; configuratie-endpoints vereisen Beheer op de server. Wie niet in de lijst staat, houdt volledige toegang.
