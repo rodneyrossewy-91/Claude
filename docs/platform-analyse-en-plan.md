@@ -201,3 +201,9 @@ A salesopdracht overnemen ✓ · B directe aanmelding ✓ · C offerte aanpassen
 - **Aansluiting actief** kan pas met complete checklist en Site ID (gecontroleerd op de server).
 - **Terugkoppeling** naar het installatiebedrijf (e-mail aan monteur, sales en aanmelder + zichtbaar in de werkomgeving): *Paneelgegevens* (Site ID, profiel, receiver, IP/poort), *Gegevens ontbreken* (optioneel dossier terug naar de monteur), *Activering mislukt* (operationele status), *Bericht*.
 - **Rollen** (tabel *Beheergebruikers*, beheerbaar onder Instellingen → Gebruikers en rollen): Beheer (alles), Meldkamer (werkbak, aanvragen, activeren), Administratie (aanvragen, aansluitbeheer, wijzigingen, logboek, statussen). Menu per rol; configuratie-endpoints vereisen Beheer op de server. Wie niet in de lijst staat, houdt volledige toegang.
+
+## Bekijk als (beheerportaal)
+
+- Alleen voor de rol Beheer: keuzelijst "Bekijk als" rechtsboven.
+- **Rol / collega** (Meldkamer, Administratie, gebruikers uit Gebruikers en rollen): alleen een weergave van menu, startpagina en "Mijn werk". Handelingen en serverrechten blijven die van de beheerder.
+- **Partnermedewerker**: opent in een nieuw tabblad de werkomgeving precies zoals die medewerker hem ziet (eigen installatiebedrijf, eigen rol). Tijdelijke link van 2 uur (Beheersessie met "Alleen Lezen"). Alle wijzigende endpoints weigeren (`magWijzigen`), knoppen zijn verborgen en het meekijken wordt gelogd.
