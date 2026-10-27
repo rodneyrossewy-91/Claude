@@ -150,3 +150,45 @@ Bewust niet in productie getest, omdat er dan echte mails uitgaan:
 - e-mailherinneringen naar echte adressen.
 
 Het beheerportaal is intern (login vereist) en is getypecheckt, maar niet in de browser doorgeklikt.
+
+---
+
+## Uitbreiding: geïntegreerde sales- en monteursworkflow (oktober 2026)
+
+### Uitgangspunt
+Eén aansluitdossier (tabel **Aanmeldingen**) met twee instaproutes en drie gescheiden gegevenslagen:
+
+| Laag | Waar opgeslagen | Leidend |
+|---|---|---|
+| 1. Commercieel (verkocht) | `Aanmeldingen.Commerciele Afspraak` (vastgelegd bij *Akkoord klant* of bij directe aanmelding) + geaccepteerde offerteversie (`Offertes`) | Sales |
+| 2. Technisch (geïnstalleerd) | `Aanmeldingen.Technische Gegevens` (installatiedossier, versie 2) + `Waarschuwingsadressen` (contactpersonen) | Monteur |
+| 3. Operationeel (actief) | Nieuwe tabellen `Meldkameraansluitingen` en `Aansluitdiensten` | Meldkamer (later: koppeling) |
+
+### Monteursproces (op basis van het prototype "Devision installateursportaal")
+Acht stappen, tussentijds opgeslagen en te hervatten: Opdracht · Klantgegevens · Commerciële afspraken · Technische installatie (paneelprofiel, transmissiepad, zones, vragen per installatiebedrijf, bijlagen) · Meldkamergegevens (contactpersonen met bellen/sms/technisch/sleutelhouder/codewoord, openingstijden en inschakelregels, surveillance, codepas) · Installatiecontrole en testen (installatiedatum, verbinding, looptest per zone) · Afwijkingen · Oplevering.
+
+- **Route A**: goedgekeurde salesopdracht; gegevens vooraf ingevuld met herkomstlabels (Overgenomen / Gecontroleerd / Gewijzigd / Nieuw).
+- **Route B**: *Nieuwe aansluiting aanmaken* door de monteur (bestaand formulier met KvK, postcode, bestaande-klantcontrole, dienstselectie) met vastgelegd klantakkoord; herkomst *Directe aanmelding monteur*. Is de offertefase verplicht voor het installatiebedrijf, dan gaat de aanvraag eerst naar sales en kan de monteur de installatie al vastleggen.
+- **Oplevering**: volledige controle op de server; zonder commerciële afwijkingen → *Technisch gereed* → *Aanmelding meldkamer* (operationeel: *Gereed voor activering*). Met afwijkingen (ander transmissiepad, niet geïnstalleerde of aanvullende diensten, overige met commerciële gevolgen) → nieuwe fase *Wacht op commerciële beoordeling*. Sales keurt goed (aanvullingen verwerkt in de afspraak, offerte blijft ongewijzigd) of stuurt terug.
+- **Actief** alleen via *Aansluiting actief* door beheer (bevoegde gebruiker); operationele status verder: activering mislukt, inactief, weer actief, afgesloten.
+- **Wijzigingshistorie**: oud → nieuw in het logboek bij stapwissel/opslaan.
+- **Codewoorden**: AES-256-GCM, sleutel alleen in omgevingsvariabele `ZITE_CODEWOORD_SLEUTEL` (beide apps). Zonder sleutel is het veld uitgeschakeld en zegt het formulier dat expliciet. Inzien in beheer wordt gelogd.
+
+### Overzichten
+- Werkomgeving sales: Open, Offertes, Goedgekeurd, In uitvoering, Beoordeling nodig, Technisch afgerond, Actief, Afgesloten.
+- Werkomgeving monteur: Beschikbaar, Mijn installaties, Concepten, Ontbrekende gegevens, Opgeleverd + knop *Nieuwe aansluiting aanmaken*.
+- Beheer *Nieuwe aansluitingen*: extra filters Afwijkingen ter beoordeling, Gereed voor activering, Activering mislukt, Nog niet actief, Operationeel actief.
+- Beheer *Aansluitbeheer* (nieuw): operationele aansluitingen, kerncijfers, maandrapportage (nieuw/geactiveerd/inactief/afgesloten) en CSV.
+- Vergelijking *Verkocht · Geïnstalleerd · Actief* in werkomgeving en beheer.
+
+### Evalink en facturatie: voorbereid, niet gekoppeld
+- Er is in de applicatie **geen bestaande Evalink-koppeling** gevonden. Velden *Extern Systeem*, *Extern Id*, *Sync Status*, *Sync Fout*, *Laatste Sync* zijn aanwezig; referenties worden handmatig vastgelegd met controle op dubbele objecten. Automatische synchronisatie volgt pas met API-specificaties en toegangsgegevens.
+- `Aansluitdiensten` registreert actieve diensten met *Actief vanaf/tot* en *Factureerbaar vanaf* (bewust leeg tot facturatieregels zijn vastgesteld).
+
+### Migratie
+- Velden toegevoegd (Aanmeldingen: Commerciele Afspraak; fase *Wacht op commerciële beoordeling*; bron *Directe aanmelding monteur*; Waarschuwingsadressen: Bellen, SMS, Technisch, Codewoord Versleuteld).
+- Bestaande contactpersonen: Bellen en SMS aan. 13 bestaande aanvragen in *Aanmelding meldkamer* kregen een operationele aansluiting *Gereed voor activering*.
+- Oude monteursformulier (TechnischFormulier/bewaarTechnisch) vervangen door het installatiedossier.
+
+### Testresultaten (live, testbedrijf ZZTEST, daarna verwijderd)
+A salesopdracht overnemen ✓ · B directe aanmelding ✓ · C offerte aanpassen v1→v2 ✓ · D afwijkende configuratie → beoordeling → goedkeuring met meerwerk ✓ · E opgeleverd = gereed voor activering, niet actief ✓ · F activering bevestigd, actieve diensten aangemaakt ✓ · G tussentijds opslaan en hervatten ✓ · H rapportage telt alleen operationeel actief ✓ · I idempotent, geen dubbele klant/aanvraag ✓ · J onvolledige oplevering, codewoord zonder sleutel en verkeerde rol geweigerd met duidelijke melding ✓. Toegang: ander installatiebedrijf 404, monteur kan geen akkoord of goedkeuring zetten, sales kan dossier niet wijzigen ✓. Mobiel (390 px) doorlopen ✓. Meldkamermails zijn in de test onderschept, niet verstuurd.
