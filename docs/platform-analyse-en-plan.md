@@ -215,3 +215,5 @@ A salesopdracht overnemen ✓ · B directe aanmelding ✓ · C offerte aanpassen
 - Dashboard: actieve aansluitingen met jaarwaarde, open offertes, in installatie, bij de meldkamer; "Vraagt aandacht" (beoordeling nodig, gegevens ontbreken, activering mislukt, offerte ≥14 dagen zonder reactie, akkoord zonder monteur ≥7 dagen); grafiek over 12 maanden; laatst gewijzigd.
 - Geen instellingen, tarieven, medewerkers of logboek. Acties blijven per rol (sales/monteur); het portaal geeft alleen extra inzage.
 - Endpoint `getPartnerportaal` filtert op het eigen bedrijf. `listMedewerkers` (bevat persoonlijke links) is nu alleen voor de rol Beheer.
+- **Team** (partnerportaal): collega's van het eigen bedrijf toevoegen/bewerken (rol, vestiging, actief, portaal), persoonlijke link kopiëren of vernieuwen. Alleen binnen het eigen bedrijf; je eigen toegang uitzetten kan niet; meekijken vanuit beheer is alleen lezen. Acties in het logboek met "(portaal)".
+- **Excel-export** van de aansluitingen (CSV met puntkomma's en UTF-8, opent direct in Excel), volgens het gekozen filter en de zoekterm.
