@@ -172,7 +172,8 @@ Acht stappen, tussentijds opgeslagen en te hervatten: Opdracht · Klantgegevens 
 - **Oplevering**: volledige controle op de server; zonder commerciële afwijkingen → *Technisch gereed* → *Aanmelding meldkamer* (operationeel: *Gereed voor activering*). Met afwijkingen (ander transmissiepad, niet geïnstalleerde of aanvullende diensten, overige met commerciële gevolgen) → nieuwe fase *Wacht op commerciële beoordeling*. Sales keurt goed (aanvullingen verwerkt in de afspraak, offerte blijft ongewijzigd) of stuurt terug.
 - **Actief** alleen via *Aansluiting actief* door beheer (bevoegde gebruiker); operationele status verder: activering mislukt, inactief, weer actief, afgesloten.
 - **Wijzigingshistorie**: oud → nieuw in het logboek bij stapwissel/opslaan.
-- **Codewoorden**: AES-256-GCM, sleutel alleen in omgevingsvariabele `ZITE_CODEWOORD_SLEUTEL` (beide apps). Zonder sleutel is het veld uitgeschakeld en zegt het formulier dat expliciet. Inzien in beheer wordt gelogd.
+- **Codewoorden**: op verzoek gewoon zichtbaar opgeslagen (veld *Codewoord* bij Waarschuwingsadressen), zichtbaar voor monteur en beheer; niet opgenomen in e-mails of PDF.
+- **Surveillance** die afwijkt van de verkochte opvolging (wel/geen of ander bedrijf) is een commerciële afwijking: reden verplicht, sales beoordeelt, bij goedkeuring vastgelegd als aanvulling op de afspraak.
 
 ### Overzichten
 - Werkomgeving sales: Open, Offertes, Goedgekeurd, In uitvoering, Beoordeling nodig, Technisch afgerond, Actief, Afgesloten.
@@ -186,9 +187,9 @@ Acht stappen, tussentijds opgeslagen en te hervatten: Opdracht · Klantgegevens 
 - `Aansluitdiensten` registreert actieve diensten met *Actief vanaf/tot* en *Factureerbaar vanaf* (bewust leeg tot facturatieregels zijn vastgesteld).
 
 ### Migratie
-- Velden toegevoegd (Aanmeldingen: Commerciele Afspraak; fase *Wacht op commerciële beoordeling*; bron *Directe aanmelding monteur*; Waarschuwingsadressen: Bellen, SMS, Technisch, Codewoord Versleuteld).
+- Velden toegevoegd (Aanmeldingen: Commerciele Afspraak; fase *Wacht op commerciële beoordeling*; bron *Directe aanmelding monteur*; Waarschuwingsadressen: Bellen, SMS, Technisch, Codewoord).
 - Bestaande contactpersonen: Bellen en SMS aan. 13 bestaande aanvragen in *Aanmelding meldkamer* kregen een operationele aansluiting *Gereed voor activering*.
 - Oude monteursformulier (TechnischFormulier/bewaarTechnisch) vervangen door het installatiedossier.
 
 ### Testresultaten (live, testbedrijf ZZTEST, daarna verwijderd)
-A salesopdracht overnemen ✓ · B directe aanmelding ✓ · C offerte aanpassen v1→v2 ✓ · D afwijkende configuratie → beoordeling → goedkeuring met meerwerk ✓ · E opgeleverd = gereed voor activering, niet actief ✓ · F activering bevestigd, actieve diensten aangemaakt ✓ · G tussentijds opslaan en hervatten ✓ · H rapportage telt alleen operationeel actief ✓ · I idempotent, geen dubbele klant/aanvraag ✓ · J onvolledige oplevering, codewoord zonder sleutel en verkeerde rol geweigerd met duidelijke melding ✓. Toegang: ander installatiebedrijf 404, monteur kan geen akkoord of goedkeuring zetten, sales kan dossier niet wijzigen ✓. Mobiel (390 px) doorlopen ✓. Meldkamermails zijn in de test onderschept, niet verstuurd.
+A salesopdracht overnemen ✓ · B directe aanmelding ✓ · C offerte aanpassen v1→v2 ✓ · D afwijkende configuratie → beoordeling → goedkeuring met meerwerk ✓ · E opgeleverd = gereed voor activering, niet actief ✓ · F activering bevestigd, actieve diensten aangemaakt ✓ · G tussentijds opslaan en hervatten ✓ · H rapportage telt alleen operationeel actief ✓ · I idempotent, geen dubbele klant/aanvraag ✓ · J onvolledige oplevering en verkeerde rol geweigerd met duidelijke melding ✓. Toegang: ander installatiebedrijf 404, monteur kan geen akkoord of goedkeuring zetten, sales kan dossier niet wijzigen ✓. Mobiel (390 px) doorlopen ✓. Meldkamermails zijn in de test onderschept, niet verstuurd.
