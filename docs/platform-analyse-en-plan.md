@@ -217,3 +217,12 @@ A salesopdracht overnemen ✓ · B directe aanmelding ✓ · C offerte aanpassen
 - Endpoint `getPartnerportaal` filtert op het eigen bedrijf. `listMedewerkers` (bevat persoonlijke links) is nu alleen voor de rol Beheer.
 - **Team** (partnerportaal): collega's van het eigen bedrijf toevoegen/bewerken (rol, vestiging, actief, portaal), persoonlijke link kopiëren of vernieuwen. Alleen binnen het eigen bedrijf; je eigen toegang uitzetten kan niet; meekijken vanuit beheer is alleen lezen. Acties in het logboek met "(portaal)".
 - **Excel-export** van de aansluitingen (CSV met puntkomma's en UTF-8, opent direct in Excel), volgens het gekozen filter en de zoekterm.
+
+## Site vooraf voorbereiden (meldkamer)
+
+- Na akkoord (Akkoord klant / Installatie in voorbereiding / in uitvoering, en bij een directe monteursaanmelding met akkoord) krijgt de aansluiting de operationele status **In voorbereiding**.
+- Bij inplannen of verzetten van de installatie krijgt de meldkamer een e-mail ("Site voorbereiden" / "Installatie verzet") met de datum.
+- Werkbak Meldkamer: filters **Voorbereiden** (paneelgegevens nog niet bij de monteur, gesorteerd op installatiedatum, rood bij ≤3 dagen) en **Voorbereid**.
+- Activeringspaneel in voorbereiding: alleen de checklistpunten "site aangemaakt" en "receiver/Site ID" (de rest na de installatie), Site ID / receiver / IP-poort, en "Na opslaan direct naar de monteur sturen" (standaard aan). Verstuurt alleen als de gegevens nieuw of gewijzigd zijn (vingerafdruk `paneel` in de terugkoppeling).
+- Monteur: in het dossier (stap Technische installatie) een groen blok met Site ID, receiver en IP/poort, of een melding dat ze nog komen.
+- Er is geen automatische koppeling met Evalink: de site wordt daar handmatig aangemaakt; het platform regelt de melding, de vastlegging en het doorsturen.
