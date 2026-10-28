@@ -474,3 +474,36 @@ Mogelijke statussen: In orde, Afgesproken maar niet actief, Actief zonder afspra
 Debiteur- en CRM-nummers staan op de centrale klantkaart, gelden dus voor alle aansluitingen van die klant, en worden gecontroleerd op dubbelen. Factureerbaar vanaf kan niet vóór de activering liggen. Alle wijzigingen komen in het logboek.
 
 **Later bij een koppeling:** gebruik bij elke synchronisatie eerst de bestaande referentie (Extern ID, Debiteurnummer, Factuur Referentie), zodat er geen dubbele objecten ontstaan. Gebruik Sync status / Sync fout / Laatste sync bij Meldkameraansluitingen voor de status per koppeling.
+
+## Procesuitbreiding: klantakkoord, wijzigingen, normtijden, klantbevestiging (28 oktober 2026)
+
+**Digitaal klantakkoord op de offerte**
+- Elke verzonden offerte krijgt een persoonlijke akkoordlink (Offertes → *Akkoord Sleutel*). Sales ziet de link in de aanvraag (fase *Offerte verzonden*) en kan hem kopiëren of de offerte met link naar de klant mailen (wordt gelogd).
+- De klant opent de pagina `?akkoord=…` in de werkomgeving-app. Daar staan de offerte, de PDF, de totalen en de voorwaarden. De klant geeft akkoord met naam, functie, e-mail en twee bevestigingen (akkoord met de voorwaarden, bevoegd), of stelt een vraag.
+- Vastgelegd in Offertes → *Klantakkoord*: naam, functie, e-mail, tijdstip, offertenummer en versie, totalen, browser en een vingerafdruk van de inhoud.
+- Een gewijzigde offerte, een nieuwe versie, een verlopen offerte of een dubbel akkoord wordt geweigerd.
+- Daarna wordt de normale overgang naar *Akkoord klant* uitgevoerd, met dezelfde automatische acties als bij een handmatig akkoord. De afspraak toont "… (digitaal akkoord)".
+- Sales en het installatiebedrijf krijgen een melding, de klant een bevestiging. Een vraag van de klant gaat naar sales; de offerte blijft dan openstaan.
+- Handmatig "Klant akkoord" (bijvoorbeeld bij een papieren handtekening) blijft mogelijk.
+
+**Wijzigingen doorvoeren**
+- Bij Beheer → Wijzigingen heeft een verzoek voor waarschuwingsadressen de knop *Doorvoeren*. Het verzoek staat naast de huidige contactpersonen; je kunt ze aanpassen, toevoegen, verwijderen of van volgorde veranderen.
+- Bij opslaan:
+  - komt elke wijziging (oud → nieuw) in het logboek van de aansluiting;
+  - staat het verzoek op *Verwerkt*;
+  - wordt de bijbehorende onboarding-vervolgactie afgerond;
+  - krijgt de meldkamer optioneel een e-mail, zonder persoonsgegevens.
+- Codewoorden blijven ongemoeid en gaan niet naar de browser.
+
+**Normtijden en "Over tijd"**
+- Instellingen → *Normtijden*: het maximale aantal dagen per fase (0 = geen signalering), met startwaarden.
+- Bij *Installatie in voorbereiding* telt de norm vanaf de installatiedatum, bij *Onboarding* vanaf de activering.
+- De werkvoorraad heeft een tegel *Over tijd* met per dossier de reden ("9 dagen in … (norm 3)"). De procesrapportage toont de norm naast de gemiddelde doorlooptijd.
+
+**Klantbevestiging bij activering**
+- Nieuwe instelling *Klant mailen bij activering*, per installatiebedrijf aan te zetten en standaard uit.
+- De klant krijgt bij *Aansluiting actief* een bevestiging met de ingangsdatum en de aankondiging van het welkomstgesprek, zonder codewoorden, contactpersonen of prijzen.
+- De e-mail gaat naar het e-mailadres van de klant, anders naar het factuur-e-mailadres.
+
+**Foutmeldingen**
+- Een mislukte statusmail, monteurmelding of meldkamermelding bij een fasewissel staat nu in Automatiseringen en als waarschuwing bij de actie.
