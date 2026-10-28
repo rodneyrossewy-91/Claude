@@ -397,3 +397,29 @@ Telstar (DETEC-2026-0023) is ongewijzigd en staat nog op Nog te bellen.
 1. Conflictdetectie: weigeren bij een verouderde versie (via het veld bijgewerkt-op) voor offerte, installatie en beheer.
 2. Technisch controleoverzicht van mislukte e-mails, PDF's en automatiseringen, met "opnieuw uitvoeren". Herinneringen hebben dit al; dat breidt uit naar de rest.
 3. Vrijgavecheck "testmelding verwerkt", met een uitzondering die alleen met een verplichte reden kan.
+
+## Optimalisatie aansluitplatform – fase 2 (28 oktober 2026)
+
+**Vrijgave**
+- Eerste activering gaat alleen via de fase "Aansluiting actief". Die vereist nu:
+  - een meldkameraansluiting met afgeronde checklist (inclusief testmelding en Site ID);
+  - een goedgekeurde finale controle;
+  - klantnaam, installatieadres en contactpersoon.
+- Uitzondering: alleen de rol Beheer, met een verplichte reden. Die komt in het logboek als "Uitzondering: …".
+- De stappenvolgorde (magOvergang) kan nooit worden overgeslagen.
+
+**Offerte versus installatie**
+- `prijsImpact()` (lib/installatie) rekent per regel uit wat erbij komt, wat vervalt en wat afwijkt, met het verschil per jaar en eenmalig. Het resultaat staat in detail.prijsimpact.
+- Getoond in het beheerdossier en in de sales-beoordeling (component `workflow/PrijsImpact`).
+- Bij hogere kosten of een afwijkende regel verschijnt de melding "nieuw akkoord nodig".
+- Vergeleken wordt altijd met de vastgelegde afspraak (de geaccepteerde offerte). Die verandert nooit.
+
+**Gelijktijdig bewerken**
+- Installatiedossier: detail.installatieVersie is een vingerafdruk van technischeGegevens. bewaarInstallatie weigert met CONFLICT bij een verouderde basis. In de wizard stopt dan de autosave en verschijnt een herlaadknop.
+- Offerte: basisVersie is de nieuwste versie bij het openen. Bestaat er intussen een nieuwere, dan volgt CONFLICT.
+
+**Fouten**
+- `meldFout()` (server/fouten) legt mislukte e-mails, PDF's, onboarding, dossier sluiten, fasewissels en dergelijke vast in het logboek (onderdeel Automatisering). Sleutels worden weggemaskeerd.
+- Automatiseringen toont per fout het dossier, met de knoppen "Opnieuw" (meldkamer, onboarding; idempotent) en "Afgehandeld" (wordt gelogd).
+
+**Getest:** vrijgave zonder gegevens geweigerd; korte reden geweigerd; Meldkamer-rol geweigerd; stap overslaan geweigerd; Beheer met reden geslaagd en gelogd; bedragberekening; oud tabblad geweigerd en nieuwe versie geslaagd; fout zichtbaar, opnieuw uitgevoerd en daarna verdwenen.
