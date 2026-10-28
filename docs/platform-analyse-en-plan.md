@@ -347,9 +347,31 @@ Telstar (DETEC-2026-0023) is ongewijzigd en staat nog op Nog te bellen.
   - De KVK-status is alleen voor Beheer.
 - *Regressietest per partner:* de werklijst is identiek aan voorheen, er zijn geen gegevens van andere partners zichtbaar, de medewerker wordt correct herkend en de dubbelcontrole werkt.
 
-**Aanbevolen (niet uitgevoerd, eerst akkoord)**
+**Aanbevolen (oorspronkelijk; inmiddels uitgevoerd, zie hieronder)**
 1. Klant- en adresgegevens staan zowel op de aanvraag als in Klanten/Locaties. Advies: Klanten/Locaties als bron, met de aanvraag als momentopname. Dit is een migratie.
 2. JSON-velden (technischeGegevens, commercieleAfspraak, finaleControle, onboarding) zijn niet doorzoekbaar en niet te filteren. Splits ze pas uit als er rapportages over nodig zijn.
 3. Lijst-endpoints laden nu alles (limiet 2000) en filteren in de code. Bij groei: paginering en filteren aan de serverkant voor de werkbakken en Aansluitbeheer.
 4. Er zijn 9 verlopen beheersessies. Advies: automatisch opruimen na 30 dagen (het logboek bewaart de audit).
 5. Opslaan in de onboarding laadt na elke klik het hele gesprek opnieuw. Een lichter antwoord kan de wachttijd per klik verder verlagen.
+
+**Uitgevoerd na akkoord (28 oktober 2026)**
+
+*Volledigheid van opvragingen*
+- De gedeelde helper `alles()` haalt tabellen in pagina's van 1000 op. Dat geldt voor 59 opvragingen die eerder bij 2000 records afkapten. Getest met paginering, ook in combinatie met filters.
+- Het logboekoverzicht haalt alleen het laatste halfjaar op en toont daarvan de nieuwste 500 regels. Per dossier blijft de volledige historie beschikbaar.
+
+*Toegang tot het beheerportaal*
+- Wie niet in Beheergebruikers staat, heeft geen toegang.
+- Bij het eerste bezoek ontstaat een toegangsverzoek: een uitgeschakelde regel die in Instellingen → Gebruikers met het label "toegangsverzoek" verschijnt.
+- Vangnet: zolang er geen enkele actieve beheerder in de lijst staat, houdt iedereen in de organisatie toegang.
+
+*Opruimen, klantgegevens en controle*
+- Beheersessies die langer dan 30 dagen verlopen zijn, worden door de uurlijkse taak opgeruimd.
+- De klantkaart en de locatie zijn de centrale bron. Ze worden bijgewerkt met nieuwe of gewijzigde naam, type, e-mail, KvK (aanvullen), plaats en land, en worden nooit leeggemaakt. Er waren geen afwijkingen tussen aanvragen en klantkaarten.
+- Nieuw veld *Controle Status* op Aanmeldingen (filterbaar), gevuld vanuit de finale controle. Bestaande dossiers zijn aangevuld.
+
+*Onboarding*
+- Opslaan hergebruikt het bijgewerkte record en de vragenlijst in plaats van opnieuw te laden. Getest: het resultaat is gelijk aan opnieuw laden.
+
+*Bewust niet gedaan*
+- Paginering in de schermen zelf. Bij het huidige aantal (15 dossiers) levert dat niets op, en de server haalt al alles volledig en gepagineerd op. Zinvol vanaf enkele honderden dossiers per lijst.
