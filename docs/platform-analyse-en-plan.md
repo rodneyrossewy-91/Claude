@@ -318,3 +318,38 @@ De ja/nee-vragenlijst (categorieën A–D) is vervangen door een stapsgewijze ge
 Telstar (DETEC-2026-0023) is ongewijzigd en staat nog op Nog te bellen.
 
 **Open punt:** voor "Hoe bereikt de klant de juiste afdeling" staan in de applicatie alleen het meldkameradres (alarmcentrale@devision.nl) en de gegevens van het installatiebedrijf. Telefoonnummers van de administratie en de meldkamer kunnen in de toelichting van dat onderdeel worden aangevuld.
+
+## Technische audit en performance (28 oktober 2026)
+
+**Gemeten**
+- Data is klein: 15 aanvragen, 105 diensten, 124 partnertarieven en 81 logregels. Traagheid komt dus niet van de datavolumes.
+- Datakwaliteit (via SQL): geen losse regels, contacten, aansluitingen, offertes of diensten. Geen aanvraag met meerdere aansluitingen of zonder partner, geen dubbele klantnamen. Alle koppelingen met de partner zijn compleet.
+- Endpointlogs:
+  - de verwerkingstijd per verzoek is meestal 100–900 ms;
+  - daar komt per verzoek 200–1600 ms opstarttijd van het platform bij, waar wij geen invloed op hebben. Het aantal verzoeken en wachtrondes is daarom de grootste knop.
+  - zwaarst waren getAanvraag (21 databasecalls), getAansluiting (17), bewaarOnboarding (12, 1,5 s) en getDiensten (tot 2,1 s).
+- In de partnerapp begon elk verzoek met twee volledige tabelscans na elkaar (partners en daarna medewerkers) om de link te controleren.
+
+**Doorgevoerd** (commit 228b1ed)
+- *Partnerapp, sleutelcontrole:* partners en medewerkers worden tegelijk opgehaald. Dat scheelt bij elk verzoek met een persoonlijke link een wachtronde.
+- *Gerichte queries per installatiebedrijf* in plaats van hele tabellen, in:
+  - getDiensten, mijnOverzicht, kansenWerk, submitWijziging, bepaalAanmelder;
+  - laadRijen (werklijst, portaal);
+  - controleerBestaand, vindOfMaakKlant en vindOfMaakLocatie.
+
+  Dit is sneller en geeft strengere gegevensscheiding. Het voorkomt ook gemiste dubbelen zodra er meer dan 2000 records zijn.
+- *Beheer:*
+  - getAansluiting haalt het detail en de partnerinstellingen parallel op;
+  - laadOnboarding doet geen dubbele contactquery meer;
+  - de lijsten voor "Bekijk als" worden pas geladen als de keuzelijst opengaat (twee verzoeken minder bij elke start).
+- *Beveiliging:* 15 leesendpoints in het beheerportaal hadden geen rolcontrole en hebben die nu.
+  - Een uitgeschakelde gebruiker wordt geweigerd (getest).
+  - De KVK-status is alleen voor Beheer.
+- *Regressietest per partner:* de werklijst is identiek aan voorheen, er zijn geen gegevens van andere partners zichtbaar, de medewerker wordt correct herkend en de dubbelcontrole werkt.
+
+**Aanbevolen (niet uitgevoerd, eerst akkoord)**
+1. Klant- en adresgegevens staan zowel op de aanvraag als in Klanten/Locaties. Advies: Klanten/Locaties als bron, met de aanvraag als momentopname. Dit is een migratie.
+2. JSON-velden (technischeGegevens, commercieleAfspraak, finaleControle, onboarding) zijn niet doorzoekbaar en niet te filteren. Splits ze pas uit als er rapportages over nodig zijn.
+3. Lijst-endpoints laden nu alles (limiet 2000) en filteren in de code. Bij groei: paginering en filteren aan de serverkant voor de werkbakken en Aansluitbeheer.
+4. Er zijn 9 verlopen beheersessies. Advies: automatisch opruimen na 30 dagen (het logboek bewaart de audit).
+5. Opslaan in de onboarding laadt na elke klik het hele gesprek opnieuw. Een lichter antwoord kan de wachttijd per klik verder verlagen.
