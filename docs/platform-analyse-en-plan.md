@@ -375,3 +375,25 @@ Telstar (DETEC-2026-0023) is ongewijzigd en staat nog op Nog te bellen.
 
 *Bewust niet gedaan*
 - Paginering in de schermen zelf. Bij het huidige aantal (15 dossiers) levert dat niets op, en de server haalt al alles volledig en gepagineerd op. Zinvol vanaf enkele honderden dossiers per lijst.
+
+## Optimalisatie aansluitplatform – fase 1 (28 oktober 2026)
+
+**Al goed ingericht (ongewijzigd)**
+- Datamodel:
+  - Klant → Locaties → Meldkameraansluiting, met het aanvraagdossier als centrale koppeling.
+  - Contactpersonen, offertes (versies als momentopname), installatie (JSON), onboarding en kansen hangen allemaal aan dat dossier.
+  - Alle koppelingen zijn compleet.
+- Partnerrechten worden bij elke serveractie gecontroleerd. Getest met directe verzoeken op het dossier van een ander bedrijf: getAanvraag, controleSales en wisselFase weigeren.
+- Performance en paginering zijn in de vorige ronde opgelost.
+
+**Uitgevoerd** (commit 219a769)
+- *Klantgegevens hergebruiken:*
+  - Is een klant of adres al bekend, dan neemt "Klantgegevens overnemen" de klant-, contact- en factuurgegevens over uit de laatste aanvraag van die klant (via de bestaande `klantUitDetail`).
+  - Bij hetzelfde adres worden ook de contactpersonen overgenomen, zonder codewoorden en alleen als er nog niets is ingevuld.
+  - De gedeelde partnerlink krijgt geen verwijzingen naar dossiers.
+- *Tijdelijke beheerlink:* de kansen zijn beperkt tot die ene aanvraag, en indienen van wijzigingsverzoeken is geblokkeerd.
+
+**Volgende fase: prioriteiten**
+1. Conflictdetectie: weigeren bij een verouderde versie (via het veld bijgewerkt-op) voor offerte, installatie en beheer.
+2. Technisch controleoverzicht van mislukte e-mails, PDF's en automatiseringen, met "opnieuw uitvoeren". Herinneringen hebben dit al; dat breidt uit naar de rest.
+3. Vrijgavecheck "testmelding verwerkt", met een uitzondering die alleen met een verplichte reden kan.
