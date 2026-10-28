@@ -423,3 +423,33 @@ Telstar (DETEC-2026-0023) is ongewijzigd en staat nog op Nog te bellen.
 - Automatiseringen toont per fout het dossier, met de knoppen "Opnieuw" (meldkamer, onboarding; idempotent) en "Afgehandeld" (wordt gelogd).
 
 **Getest:** vrijgave zonder gegevens geweigerd; korte reden geweigerd; Meldkamer-rol geweigerd; stap overslaan geweigerd; Beheer met reden geslaagd en gelogd; bedragberekening; oud tabblad geweigerd en nieuwe versie geslaagd; fout zichtbaar, opnieuw uitgevoerd en daarna verdwenen.
+
+## Optimalisatie aansluitplatform – fase 3 (28 oktober 2026)
+
+**Al aanwezig (ongewijzigd)**
+- *Sales:* werklijst met de filters Offertes, Goedgekeurd, In uitvoering, Beoordeling nodig en Actief (met tellers), de banner "Offertes om op te volgen" en commerciële kansen.
+- *Monteur:* de filters Beschikbaar, Mijn installaties, Concepten en Ontbrekende gegevens, en de knop "Nieuwe aansluiting".
+- *Partnerbeheerder:* partnerportaal met dashboard, aansluitingen (met Excel-export), wijzigingen en team.
+- *Beheer:* commerciële KPI's en grafieken, plus tegels voor controle en onboarding.
+
+**Toegevoegd**
+- *Werkvoorraad "Vraagt aandacht"* (getProcesoverzicht, Werkvoorraad.tsx), met de tegels:
+  - gereed voor vrijgave (controle goedgekeurd en checklist compleet);
+  - bij de meldkamer;
+  - commerciële beoordeling;
+  - onvolledig;
+  - installaties lopend;
+  - onboarding open;
+  - geactiveerd in de afgelopen 30 dagen.
+
+  Klik een tegel voor de dossiers en een dossier om het direct te openen.
+- *Procesrapportage* (Beheer/Administratie):
+  - de gemiddelde doorlooptijd per fase, berekend uit de logregels "Fase A → B";
+  - per installatiepartner: lopend, aangesloten, gemiddelde doorlooptijd en afwijkingen;
+  - totalen voor wacht op vrijgave, afwijkingen, onboarding afgerond en succesvol, en vrijgaven als uitzondering.
+
+  Er worden geen extra gegevens opgeslagen.
+- *Mobiel:*
+  - Getest op 390 px via een tijdelijke meekijksessie, die daarna is verwijderd. Werklijst, dossier en monteurwizard hebben geen horizontale scroll en geven geen fouten.
+  - De klantnaam in de werklijst wordt niet meer afgekapt.
+  - De wizard toont de legenda "velden met * zijn verplicht" en tijdens meekijken de juiste melding over opslaan.
