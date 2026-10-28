@@ -453,3 +453,24 @@ Telstar (DETEC-2026-0023) is ongewijzigd en staat nog op Nog te bellen.
   - Getest op 390 px via een tijdelijke meekijksessie, die daarna is verwijderd. Werklijst, dossier en monteurwizard hebben geen horizontale scroll en geven geen fouten.
   - De klantnaam in de werklijst wordt niet meer afgekapt.
   - De wizard toont de legenda "velden met * zijn verplicht" en tijdens meekijken de juiste melding over opslaan.
+
+## Optimalisatie aansluitplatform – fase 4: voorbereiding externe koppelingen (28 oktober 2026)
+
+**Drie lagen, nu vergelijkbaar** (`dienstLagen()` in server/aansluiting, getoond in het dossier onder Producten en diensten):
+1. *Afgesproken:* de vastgelegde afspraak (geaccepteerde offerte), aangevuld met latere aanvullingen (goedgekeurde installatieafwijkingen en dienstwijzigingen met klantakkoord). Een vervallen regel vervangt de dienst; de nieuwe stand staat in "toegevoegd".
+2. *Actief:* de lopende aansluitdiensten.
+3. *Factureerbaar:* actieve diensten met een "factureerbaar vanaf" op of vóór vandaag.
+
+Mogelijke statussen: In orde, Afgesproken maar niet actief, Actief zonder afspraak, Aantal wijkt af, Nog niet factureerbaar.
+
+**Referenties voor latere koppelingen** (alle optioneel, niets gekoppeld):
+
+| Systeem | Waar vastgelegd |
+|---|---|
+| Meldkamer (Evalink) | Meldkameraansluitingen: Extern systeem, Extern ID en Sync status (bestond al) |
+| Financiële administratie | Klanten: Debiteurnummer. Partners: Debiteurnummer (bij inkoop). Aansluitdiensten: Factuur Referentie en Factureerbaar Vanaf. Diensten: Artikelcode (bestond al) |
+| CRM | Klanten: CRM ID |
+
+Debiteur- en CRM-nummers staan op de centrale klantkaart, gelden dus voor alle aansluitingen van die klant, en worden gecontroleerd op dubbelen. Factureerbaar vanaf kan niet vóór de activering liggen. Alle wijzigingen komen in het logboek.
+
+**Later bij een koppeling:** gebruik bij elke synchronisatie eerst de bestaande referentie (Extern ID, Debiteurnummer, Factuur Referentie), zodat er geen dubbele objecten ontstaan. Gebruik Sync status / Sync fout / Laatste sync bij Meldkameraansluitingen voor de status per koppeling.
