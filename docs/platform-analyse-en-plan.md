@@ -507,3 +507,19 @@ Debiteur- en CRM-nummers staan op de centrale klantkaart, gelden dus voor alle a
 
 **Foutmeldingen**
 - Een mislukte statusmail, monteurmelding of meldkamermelding bij een fasewissel staat nu in Automatiseringen en als waarschuwing bij de actie.
+
+## Directe aanmelding door de monteur: klantgegevens via sales (29 oktober 2026)
+
+- **Monteur op locatie:** alleen klant en object zijn verplicht (klanttype, naam, objectadres). Facturatie, looptijd, betaalwijze en IBAN mogen nog open blijven. Wat wél is ingevuld, wordt gecontroleerd.
+- **Sales aan zet:** de aanvraag komt in het bakje *Klantgegevens aanvullen* in de werkomgeving en in het partnerportaal (Aandacht).
+  - Sales krijgt een e-mail: de vaste salesmedewerker, anders de sales van dezelfde vestiging, anders alle sales van het bedrijf.
+  - Sales vult aan via het bekende klantformulier, met dezelfde controles als een reguliere aanvraag.
+  - Diensten, prijzen, contactpersonen en opvolging blijven zoals vastgelegd.
+- **Geen onvolledige klantinformatie naar de meldkamer:**
+  - *Aanmelding meldkamer* vereist complete klantgegevens.
+  - Levert de monteur op terwijl sales nog moet aanvullen, dan blijft de aansluiting op *Technisch gereed* met de volgende stap "Sales: klantgegevens aanvullen".
+  - Na het aanvullen gaat de aansluiting automatisch naar de meldkamer (zonder afwijkingen) of naar de commerciële beoordeling.
+- **Eindresultaat gelijk aan het reguliere proces:** zodra de gegevens compleet zijn, ontstaat een *opdrachtbevestiging*.
+  - Dit is een geaccepteerde offerte met PDF, op basis van de afspraak en het akkoord op locatie ("Op locatie, vastgelegd door monteur …").
+  - Het dossier heeft daarmee, net als bij het reguliere proces, een offerte, een akkoord, complete klant- en factuurgegevens en een gekoppelde salesmedewerker.
+  - De opdrachtbevestiging wordt één keer gemaakt, nooit dubbel. Vult de monteur zelf alles in, dan volgt de opdrachtbevestiging direct.
