@@ -542,3 +542,25 @@ Debiteur- en CRM-nummers staan op de centrale klantkaart, gelden dus voor alle a
   - het beheerportaal toont de keten, de referentie en het debiteurnummer van het hoofdkantoor;
   - je kunt zoeken op keten en de export bevat de kolommen Keten en Soort.
 - **Welkomstgesprek:** altijd met de winkel; dit werkt via de contactpersoon van de aanvraag.
+
+## Organisaties: Detec en Devision Security Solutions (30 oktober 2026)
+
+- **Per partner** (Beheer → Partners):
+  - *organisatie*: Detec of Devision Security Solutions (DSS);
+  - *rol*: Installatiebedrijf of Verkooporganisatie. DSS zelf is een partner met de rol Verkooporganisatie.
+- **Per organisatie** (Instellingen → Organisaties):
+  - standaard afrekening en tariefset voor nieuwe partners, overgenomen bij het aanmaken;
+  - e-mailmeldingen (bijvoorbeeld aan de accountmanager), naar keuze bij: Nieuwe aanvraag, Akkoord klant, Aanmelding meldkamer, Aansluiting actief, Opgezegd en Geannuleerd. De mails bevatten geen contactpersonen, codewoorden of prijzen.
+- **DSS verkoopt zelf:**
+  - DSS kiest per aanvraag het *uitvoerend installatiebedrijf* (Aanmeldingen → *Uitvoerend Partner*). Dat kan tot het inplannen van de installatie.
+  - De monteurs van dat bedrijf zien de opdracht vanaf het akkoord van de klant en krijgen een e-mail.
+  - Zij mogen alleen de installatiestappen zetten (inplannen, uitvoeren, opleveren, onvolledig). Klant, offerte en prijzen blijven bij DSS.
+  - Bij *Akkoord klant* zonder uitvoerder is de volgende stap "Verkoper: uitvoerend installatiebedrijf kiezen", en dat staat in het bakje *Uitvoerder kiezen*.
+- **Inzage:** sales en medewerkers met het partnerportaal van een verkooporganisatie zien de dossiers van de installatiebedrijven van dezelfde organisatie. Dat staat in het eigen bakje *Installatiebedrijven (inzage)* en is alleen te lezen.
+- **Rapportage:**
+  - de procesrapportage heeft een tabel per organisatie, en de tabel per partner toont de organisatie;
+  - Nieuwe aansluitingen heeft een filter op organisatie, een uitvoerder-label en de exportkolommen Organisatie en Uitvoerder.
+- **Inrichting:**
+  - DETEC Beveiliging staat op Detec.
+  - Bij 3B Beveiligingstechniek en TKS Security moet de organisatie nog worden gekozen.
+  - DSS zelf moet nog als partner (verkooporganisatie) worden aangemaakt.
