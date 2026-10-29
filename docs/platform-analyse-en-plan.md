@@ -523,3 +523,22 @@ Debiteur- en CRM-nummers staan op de centrale klantkaart, gelden dus voor alle a
   - Dit is een geaccepteerde offerte met PDF, op basis van de afspraak en het akkoord op locatie ("Op locatie, vastgelegd door monteur …").
   - Het dossier heeft daarmee, net als bij het reguliere proces, een offerte, een akkoord, complete klant- en factuurgegevens en een gekoppelde salesmedewerker.
   - De opdrachtbevestiging wordt één keer gemaakt, nooit dubbel. Vult de monteur zelf alles in, dan volgt de opdrachtbevestiging direct.
+
+## Winkelketens: eigen filiaal of franchise (30 oktober 2026)
+
+- **Ketens** (bijv. Albert Heijn) beheert Devision centraal onder Instellingen → *Winkelketens*. Ze zijn bruikbaar voor alle installatiebedrijven. Per keten:
+  - de factuurgegevens van het hoofdkantoor;
+  - het KvK-nummer en debiteurnummer;
+  - de naam van de verplichte referentie, bijvoorbeeld "Filiaalnummer";
+  - een contactpersoon en een optionele raamafspraak.
+- **Per aanvraag:** "Onderdeel van een winkelketen" → keten → *Eigen filiaal* of *Franchise*, plus de referentie. Een gelijk KvK-nummer stelt "Eigen filiaal" voor, een ander KvK-nummer "Franchise".
+- **Eigen filiaal:**
+  - De factuurgegevens komen altijd van het hoofdkantoor. De server vult ze in; ze worden niet uit het formulier overgenomen.
+  - De referentie is verplicht. Bij een snelle aanmelding door de monteur vult sales die aan.
+  - De klantkaart is het hoofdkantoor, de winkel is de locatie.
+- **Franchise:** de klant is de franchisenemer, de factuur gaat naar de winkel zelf en de keten wordt alleen gekoppeld voor overzicht en rapportage.
+- **Zichtbaar:**
+  - de PDF's (offerte, opdrachtbevestiging, meldkameraanmelding) tonen keten, soort en referentie;
+  - het beheerportaal toont de keten, de referentie en het debiteurnummer van het hoofdkantoor;
+  - je kunt zoeken op keten en de export bevat de kolommen Keten en Soort.
+- **Welkomstgesprek:** altijd met de winkel; dit werkt via de contactpersoon van de aanvraag.
