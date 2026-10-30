@@ -581,3 +581,8 @@ Debiteur- en CRM-nummers staan op de centrale klantkaart, gelden dus voor alle a
 - **Aanvulling 30 oktober:** DSS betaalt Devision dezelfde inkoop als de Detec-locaties. Instelling: *Devision-inkoop gelijk aan de tariefset van* → DETEC Beveiliging (Instellingen → Organisaties, DSS).
   - De intercompany-prijs komt uit die tariefset: afwijkende partnerprijzen, en geïndexeerde prijzen vanaf de begindatum van de periode. Staat een dienst niet in die tariefset, dan geldt de centrale prijs; dat staat in de export vermeld.
   - De optionele extra korting staat standaard op 0%.
+- **Inkooptarieven (30 oktober):**
+  - Per partner en dienst staan een eigen *Inkoopprijs* en *Inkoop eenmalig* (Partnertarieven), los van de verkoopprijzen.
+  - Ze zijn alleen te zien en te bewerken onder Facturatie → *Inkooptarieven*, door Beheer en Administratie. Lege velden kun je vullen als percentage van de tarievenlijst. Wijzigingen staan in het logboek.
+  - Sales ziet ze nooit: offertes, de werkomgeving en de PDF's gebruiken altijd de tarievenlijst. Dit is gecontroleerd door de antwoorden van de werkomgeving op het inkoopbedrag te doorzoeken.
+  - Ze worden gebruikt voor de intercompany-factuur Devision → DSS (de inkooptarieven van DETEC) en voor installatiebedrijven met afrekening Inkoop. Zonder ingestelde inkoopprijs geldt de tarievenlijst; dat staat in de export vermeld.
