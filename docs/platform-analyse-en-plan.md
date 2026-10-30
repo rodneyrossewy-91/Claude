@@ -578,3 +578,6 @@ Debiteur- en CRM-nummers staan op de centrale klantkaart, gelden dus voor alle a
   - Er zijn CSV-exports (puntkomma, UTF-8) per administratie, plus een export *Intercompany Devision → DSS*.
   - Signalen: actieve diensten zonder factureerbaar vanaf (die komen niet in de export) en debiteuren zonder debiteurnummer.
 - Het platform verstuurt zelf geen facturen. Een directe koppeling met de boekhoudpakketten volgt, zodra bekend is welke pakketten het zijn en hun documentatie er is.
+- **Aanvulling 30 oktober:** DSS betaalt Devision dezelfde inkoop als de Detec-locaties. Instelling: *Devision-inkoop gelijk aan de tariefset van* → DETEC Beveiliging (Instellingen → Organisaties, DSS).
+  - De intercompany-prijs komt uit die tariefset: afwijkende partnerprijzen, en geïndexeerde prijzen vanaf de begindatum van de periode. Staat een dienst niet in die tariefset, dan geldt de centrale prijs; dat staat in de export vermeld.
+  - De optionele extra korting staat standaard op 0%.
