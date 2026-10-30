@@ -564,3 +564,17 @@ Debiteur- en CRM-nummers staan op de centrale klantkaart, gelden dus voor alle a
   - DETEC Beveiliging staat op Detec.
   - Bij 3B Beveiligingstechniek en TKS Security moet de organisatie nog worden gekozen.
   - DSS zelf moet nog als partner (verkooporganisatie) worden aangemaakt.
+
+## Facturatie per administratie (30 oktober 2026)
+
+- **Wie factureert:** bij elke organisatie stel je *Facturatie door* in (Instellingen → Organisaties). Detec valt onder Devision, Devision Security Solutions onder de eigen administratie, met eigen boekhouding en software. Het dossier toont "Gefactureerd door".
+- **Intercompany:** Devision factureert DSS per aansluiting, tegen de centrale tarieven min een instelbare korting. Het debiteurnummer van DSS bij Devision leg je vast bij de organisatie.
+- **Pagina Facturatie** (Beheer en Administratie):
+  - Je kiest een periode. Per actieve dienst met *factureerbaar vanaf* berekent het systeem:
+    - het periodebedrag naar rato van de dagen (per jaar of per maand);
+    - de eenmalige kosten, in de periode waarin de dienst factureerbaar werd.
+  - Diensten op basis van gebruik (per uur, week, oproep enz.) staan erin, maar zonder bedrag.
+  - De debiteur per regel is de eindklant (provisie), het hoofdkantoor (eigen filiaal van een keten) of het installatiebedrijf (inkoop). Debiteurnummer, factuuradres, referenties, artikelcode en factuurreferentie gaan mee.
+  - Er zijn CSV-exports (puntkomma, UTF-8) per administratie, plus een export *Intercompany Devision → DSS*.
+  - Signalen: actieve diensten zonder factureerbaar vanaf (die komen niet in de export) en debiteuren zonder debiteurnummer.
+- Het platform verstuurt zelf geen facturen. Een directe koppeling met de boekhoudpakketten volgt, zodra bekend is welke pakketten het zijn en hun documentatie er is.
