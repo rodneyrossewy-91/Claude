@@ -316,3 +316,56 @@ Handleidingbeheer toont nu ook:
 4. **Documentatiecontrole op formuliervelden en knoppen.**
 5. **Rondleidingen in het beheerportaal** testen in de browser.
 6. **Leervoortgang bij een adreswijziging:** gaat nog niet automatisch mee als het e-mailadres van een beheerder wijzigt.
+
+---
+
+## Update: drie aanvullingen (12 november 2026)
+
+**Status:** gepubliceerd. Commit `b85f89c`.
+
+### 1. Rondleidingen beheren zonder code
+
+Nieuw tabblad **Handleidingbeheer → Rondleidingen**. Je kunt per rondleiding:
+- teksten, volgorde, rollen, duur en aan/uit aanpassen;
+- stappen toevoegen, verwijderen of verschuiven;
+- een nieuwe rondleiding aanmaken;
+- een concept bewaren, publiceren of terugzetten naar de standaard uit de code, met historie.
+
+Een stap kan alleen wijzen naar een bekend ankerpunt in de applicatie. De server controleert dat ook.
+
+De apps halen de gepubliceerde rondleidingen van de server, gefilterd op app en rol. Zolang er niets is gepubliceerd, geldt de standaard uit de code.
+
+**Getest op de server:**
+- het concept was niet zichtbaar; na publiceren stond het direct live;
+- terugzetten naar de standaard werkte;
+- een onbekend ankerpunt werd geweigerd;
+- een monteur zag alleen portaalrondleidingen.
+
+**Niet in de browser getest:** het bewerkscherm. Dat vraagt een Zite-login.
+
+### 2. Documentatiecontrole op velden en knoppen
+
+De controle vergelijkt nu ook deze onderdelen met de vorige momentopname:
+- fase-knoppen in het dossier (`OVERGANGEN`);
+- het menu van het beheerportaal;
+- velden en stappen van het installatiedossier;
+- de eerste controle, de finale controle en de meldkamerchecklist;
+- de velden van het aanvraagformulier, met verplicht of optioneel.
+
+Die laatste levert het partnerportaal zelf aan (instelling `HELP_BRON_PORTAAL`, bijgewerkt als iemand het Help Center opent). Dat zijn 56 velden.
+
+Wijzigt er iets, dan krijgen de bijbehorende artikelen de status "Controle nodig", met de reden in de versiehistorie. Rondleidingen die naar een verdwenen onderdeel wijzen, worden gemeld.
+
+**Getest:** een gesimuleerde verwijderde knop, gewijzigde taak en nieuw veld werden alle drie gevonden. Precies de 6 geraakte artikelen werden gemarkeerd; dat is na de test teruggezet.
+
+**Beperking:** losse knoppen en velden op schermen die niet in deze lijsten staan, worden niet bewaakt. Denk aan knoppen op beheerpagina's en velden van partner- of medewerkerbeheer. Daarvoor moeten die schermen eerst een vaste lijst krijgen.
+
+### 3. Leervoortgang bij een adreswijziging
+
+De bestaande omzetting bij een gewijzigd e-mailadres (`zetEmailOm`) neemt nu ook de Leervoortgang mee.
+
+**Getest:** de voortgang ging mee naar het nieuwe adres, zonder bijwerkingen elders.
+
+### Regressie
+
+De 20 vingerafdrukken van de beheerendpoints zijn identiek. Alle testgegevens zijn verwijderd.
