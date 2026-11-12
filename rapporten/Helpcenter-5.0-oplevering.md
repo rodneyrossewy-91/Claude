@@ -421,3 +421,25 @@ De 20 vingerafdrukken van de beheerendpoints zijn identiek. Alle testgegevens zi
 4. De API-sleutel. Die zet je zelf in Zite als omgevingsvariabele (`ZITE_EVALINK_API_URL`, `ZITE_EVALINK_COMPANY_ID`, `ZITE_EVALINK_API_TOKEN`). Niet via de chat.
 
 Daarna is het één functie (`haalUitEvalink` in `packages/components/server/eventlog.ts`) en één schakelaar (`EVALINK_AANROEP_GEBOUWD`).
+
+---
+
+## Update: tools voor monteur, sales en eigenaar (12 november 2026)
+
+**Status:** gebouwd en gepubliceerd. Zite-commit `9e8b35f`. De onderdelen 1, 2 en 7 halen hun gegevens uit Evalink en tonen tot die koppeling er is eerlijk "nog niet gekoppeld". Onderdeel 8 werkt nu al met de eigen gegevens.
+
+| # | Onderdeel | Waar | Wat het doet | Getest |
+|---|---|---|---|---|
+| 1 | **Doormeldtest** | Installatiedossier, stap 6 (monteur) | Test starten, zones laten melden, Controleren: zones die bij de meldkamer binnenkwamen worden afgevinkt bij de looptest. Elke controle komt in de historie (bewijs van de oplevering). Zonder koppeling vinkt de monteur de looptest zelf af, zoals nu | 0050 en 0076: "geen site"; buiten de installatiefase en voor andere partners geweigerd |
+| 2 | **Testmodus meldkamer** | Dossier (portaal: monteur; beheer: Beheer en Meldkamer) | Aansluiting 1, 2, 4 of 8 uur in test zetten, of eruit halen, met een bevestigingsvraag. Aan en uit komen in de historie | 0016: "niet gekoppeld"; sales, meekijken en andere partners geweigerd; ongeldige duur geweigerd |
+| 7 | **Maandrapport** | Klanten → klant met een actieve aansluiting (partnerportaal en sales) | PDF per maand (laatste 12 maanden): per adres en aansluiting het aantal meldingen per soort. Geen namen van meldkamermedewerkers | DETEC-klant: "niet gekoppeld"; dezelfde klant via een andere partner: "Klant niet gevonden"; toekomstige maand geweigerd |
+| 8 | **Wat komt terug, en per monteur** | Partnerportaal → dashboard, onder "Hoe loopt het proces?" (laadt pas bij openklikken) | Terugsturen door de administratie (naar sales of monteur, met toelichting en link naar het dossier) en per monteur: opgeleverd, in één keer goed, teruggestuurd, loopt nu | DETEC: 2 monteurs (3 en 1 opgeleverd, gelijk aan de 4 technisch gerede dossiers); geen dossiers van andere partners |
+
+De doorlooptijd, offertes met akkoord en "in één keer goed" stonden al op het dashboard ("Hoe loopt het proces?"); onderdeel 8 vult dat aan.
+
+**Nachtelijke test:** de portaaltest controleert nu ook of testmodus en doormeldtest voor andere partners geweigerd worden.
+
+**Nodig van Evalink (naast wat de eventlog al nodig heeft):**
+- Of de API een site tijdelijk in test kan zetten en de stand kan teruggeven. Dan worden `zetTestmodusInEvalink` en `testmodusUitEvalink` ingevuld en gaat `EVALINK_TESTMODUS_GEBOUWD` aan.
+- In welk formaat Evalink het zonenummer in een event geeft. De doormeldtest vergelijkt nu het nummer uit het installatiedossier, waarbij voorloopnullen niet meetellen ("007" = "7").
+- Welke soorten events Evalink gebruikt. Het maandrapport telt per soort zoals Evalink die geeft.
