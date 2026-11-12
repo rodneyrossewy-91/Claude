@@ -391,3 +391,33 @@ De 20 vingerafdrukken van de beheerendpoints zijn identiek. Alle testgegevens zi
 - een iets donkerdere knopkleur.
 
 **Niet automatisch:** de browsertest van het portaal draait niet 's nachts, omdat Zite geen browser heeft. Die doe ik bij grotere wijzigingen.
+
+---
+
+## Update: Eventlog uit Evalink (12 november 2026)
+
+**Status:** gebouwd en gepubliceerd, maar **nog niet gekoppeld**. De aanroep naar Evalink volgt zodra de API-gegevens er zijn. Zite-commit `d5ee68d`.
+
+**Wat er is:**
+- Een kaart **Eventlog** in het dossier, in het beheer (Nieuwe aansluitingen) en in het partnerportaal, vanaf de fase "Aanmelding meldkamer".
+- Niets wordt vooraf geladen. Je klikt op **Ophalen**. De standaardperiode is 24 uur; je kunt ook 3, 7 of 30 dagen kiezen.
+- Live opgehaald en nergens bewaard. De kolom "Door" (wie een melding afhandelde) zie je alleen in het beheer.
+- Zolang de koppeling er niet is, staat er eerlijk "nog niet gekoppeld aan Evalink". Er worden geen voorbeeld-events getoond.
+- Een dossier zonder Site ID krijgt de melding dat er nog geen site is.
+
+**Afscherming:**
+- In het beheer mogen alleen de rollen Beheer, Meldkamer en Administratie de eventlog opvragen.
+- In het portaal zie je alleen de eventlog van aansluitingen van je eigen partner. Dit wordt gecontroleerd met dezelfde toegangscontrole als bij het openen van het dossier.
+- De nachtelijke portaaltest controleert dit elke nacht.
+
+**Getest:**
+- Beheer, 6 DETEC-dossiers: 3 keer "niet gekoppeld" (site aanwezig) en 3 keer "geen site". De standaard is 24 uur; een ongeldige periode wordt geweigerd.
+- Portaal: eigen partner krijgt een status. Medewerkers van andere partners werden 8 van 8 keer geweigerd.
+
+**Nodig om te koppelen (aan te leveren door Rodney):**
+1. De API-beschrijving van Evalink: welk endpoint geeft de eventhistorie van een site, met welke velden.
+2. Het Company ID.
+3. Bevestiging dat ons Site ID gelijk is aan de site in Evalink. Of anders: welk ID we wel moeten gebruiken.
+4. De API-sleutel. Die zet je zelf in Zite als omgevingsvariabele (`ZITE_EVALINK_API_URL`, `ZITE_EVALINK_COMPANY_ID`, `ZITE_EVALINK_API_TOKEN`). Niet via de chat.
+
+Daarna is het één functie (`haalUitEvalink` in `packages/components/server/eventlog.ts`) en één schakelaar (`EVALINK_AANROEP_GEBOUWD`).
