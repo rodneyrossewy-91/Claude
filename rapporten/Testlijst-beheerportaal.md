@@ -1,4 +1,4 @@
-# Testlijst beheerportaal (ongeveer 10 minuten)
+# Testlijst beheerportaal (ongeveer 15 minuten)
 
 Doorlopen na een update, met je eigen Zite-login. **Sla niets op**, tenzij een stap dat uitdrukkelijk vraagt.
 
@@ -20,5 +20,9 @@ Klopt iets niet? Noteer dan het scherm, wat je deed en wat je zag. Of geef via d
 | 12 | Handleidingbeheer → Documentatiecontrole / Feedback / Gebruik | Open de drie tabbladen | Controle: "komt overeen met de code"; jouw feedback uit stap 5 staat er; Gebruik toont de rondleiding uit stap 9 |
 | 13 | Instellingen → Automatiseringen | Klik bij "Nachtelijke regressietest" op **Nu uitvoeren** | Na 10 à 20 seconden staan er 5 groene vinkjes |
 | 14 | Mobiel | Maak het venster smal (of gebruik je telefoon) en herhaal stap 4 | Het menu zit achter de menuknop; de coach vult het hele scherm en sluit met het kruisje |
+| 15 | Eerste controle | Klap een open dossier open en vul een aansluitnummer in. **Sla niet op** | Het aansluitnummer vinkt zichzelf af. Bij de klantgegevens staan vijf automatische controles; als die allemaal kloppen, staat het vinkje al aan |
+| 16 | Nieuwe aansluitingen | Open een dossier vanaf "Aanmelding meldkamer" | Je ziet de kaarten Eventlog en Testmodus meldkamer met "nog niet gekoppeld". "In test zetten" vraagt om een toelichting |
+| 17 | Partners → instellingen → Herinneringen | Bekijk de instellingen. **Wijzig niets** | Er is een schakelaar "Klant herinneren" |
+| 18 | Partnerportaal (meekijken) | Klik op het bel-icoon naast de titel en open Mijn profiel | Meldingen openen; het profiel toont "Portaal als app op je telefoon" |
 
 Als alles klopt, is de update in orde. Het partnerportaal en de procescoach in het portaal worden elke nacht automatisch getest. Een browsertest van het portaal draai ik bij grotere wijzigingen.

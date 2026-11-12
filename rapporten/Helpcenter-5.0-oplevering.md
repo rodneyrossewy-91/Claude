@@ -462,3 +462,35 @@ De doorlooptijd, offertes met akkoord en "in één keer goed" stonden al op het 
 | **Meldingen** | Bel-icoon naast de paginatitel | Gebeurtenissen van de laatste 14 dagen op dossiers waar je sales of monteur bent, door anderen. Alleen de korte actie, geen details of bedragen. "Gezien" per toestel | 8 medewerkers: alleen eigen dossiers, geen bedragen; browser: lijst opent |
 
 **Niet gedaan:** "opslaan en volgende" in de finale controle; die zit in het dossier zelf en heeft geen lijst om naar door te gaan.
+
+---
+
+## Update: handleidingen, procesbeschrijving en rondleiding bijgewerkt (12 november 2026)
+
+**Procesbeschrijving (Procesbeheer, versie 1.1):** de stappen Klantgegevens, Verzonden en opvolging, Eerste controle, Werkvoorbereiding en planning, Installatie en oplevering en Activering beschrijven nu de nieuwe functies. Wat nog op Evalink wacht, staat er als "zodra Evalink is gekoppeld". De uitleg per stap is aangevuld.
+
+**Handleidingen die uit het processchema volgen:** de documentatiecontrole vond 6 gewijzigde stappen en heeft ze opnieuw opgebouwd. De 4 die partners zien staan ter controle; de 2 interne (Eerste controle, Activering) zijn gepubliceerd.
+
+**Nieuwe handleidingen:**
+
+| Handleiding | Voor | Status |
+|---|---|---|
+| Het portaal als app op je telefoon | Portaal (alle rollen) | Ter controle |
+| Op locatie: Vandaag, foto's en werken zonder bereik | Monteur | Ter controle |
+| Doormeldtest en testmodus | Monteur | Ter controle |
+| Eventlog van een aansluiting | Portaal en intern | Ter controle |
+| Maandrapport voor je klant | Sales, partnerbeheerder | Ter controle |
+| Aanvragen voor meerdere adressen of filialen | Sales, partnerbeheerder | Ter controle |
+| Meldingen (bel-icoon) | Portaal (alle rollen) | Ter controle |
+| Wat komt terug, en per monteur | Partnerbeheerder | Ter controle |
+| Eventlog en testmodus in het beheer | Beheer, Administratie, Meldkamer | Gepubliceerd (graag nakijken) |
+| Eerste controle: automatische controles en volgende dossier | Administratie | Gepubliceerd (graag nakijken) |
+| Herinnering aan de klant bij een openstaande offerte | Beheer | Gepubliceerd (graag nakijken) |
+
+**Bijgewerkt:** de schermhandleidingen Klanten, Dashboard en Taken (ter controle) en de Testlijst na een update (4 nieuwe stappen, ook in `rapporten/Testlijst-beheerportaal.md`).
+
+**Rondleiding en Academy:** de rondleiding "Kennismaking met het portaal" heeft een stap Meldingen. De nieuwe handleidingen staan als modules in de Sales-, Monteur-, Partnerbeheer-, Administratie- en Meldkamer-Academy. Een module verschijnt pas als de handleiding is gepubliceerd.
+
+**Documentatiecontrole:** na deze update geen verschillen meer.
+
+**Ter controle staan nu:** 28 + 8 nieuwe + 4 bijgewerkte processtappen. De 4 processtappen en de 3 schermhandleidingen stonden al ter controle, dus het totaal is 36.
