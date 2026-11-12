@@ -1,4 +1,4 @@
-# DEVISION Interactive Help Center 5.0 – opleverrapport (fase 1 t/m 4)
+# DEVISION Interactive Help Center 5.0 – opleverrapport (fase 1 t/m 6)
 
 Stand: 12 november 2026.
 
@@ -6,9 +6,9 @@ Stand: 12 november 2026.
 |---|---|
 | Workspace | Security Technology Registration (Zite) |
 | Apps | Aanmeldingen beheer (`q2yedas16g`), Aanmelding 3B (`kvha4p1c4b`) |
-| Commit | `c0d0d6b` |
+| Commits | `c0d0d6b` (fase 1–4), `3530e25` en `ece7806` (fase 5–6) |
 | Gebouwd en getest | Ja |
-| Gepubliceerd | **Nee** (wacht op akkoord) |
+| Gepubliceerd | **Ja**, na akkoord op 12 november 2026 |
 
 ## Samenvatting
 
@@ -241,3 +241,78 @@ Zite heeft wel AI-velden, die AI-credits van de organisatie kosten. Een echte vr
 - Gecontroleerd publiceren, met versiehistorie.
 - Automatische signalering als de code verandert.
 - Feedback en zoekvragen zonder resultaat als verbeterbron.
+
+---
+
+## Update – fase 5 en 6 (12 november 2026)
+
+**Status:** gepubliceerd na akkoord.
+
+### F. Rondleidingen
+
+| Onderdeel | Status |
+|---|---|
+| **Engine** (`help/Rondleiding.tsx`), zie hieronder | Gebouwd en in de browser getest |
+| **Rondleidingen** (`help/leren.ts`), zie hieronder | Gebouwd |
+| **Eenmalig aanbod** "Nieuw hier?" bij het eerste bezoek | Getest |
+
+**De engine:**
+- stabiele `data-tour`-ankers en vaste veld-id's;
+- een uitsparing rond het onderdeel, de rest van het scherm gedimd;
+- uitleg naast het onderdeel, of rechtsonder bij grote onderdelen;
+- op mobiel staat de uitleg onderaan;
+- Vorige, Volgende, Overslaan, Opnieuw starten en Afsluiten (ook met Esc en de pijltjestoetsen);
+- de voortgang wordt bewaard;
+- navigatie tussen schermen;
+- netjes doorgaan als een onderdeel ontbreekt;
+- de engine klikt nergens zelf op en bewaart niets, dus er worden geen gegevens gewijzigd.
+
+**De vijf rondleidingen:**
+- Kennismaking met het beheerportaal;
+- Een dossier lezen en afhandelen (beheer);
+- Kennismaking met het portaal;
+- Een nieuwe aanvraag invullen;
+- Een dossier lezen (portaal).
+
+Opties als "Niet nu" en "Niet meer tonen" worden onthouden.
+
+**Browsertest in het portaal**, op desktop en iPhone-formaat:
+- de kennismaking, van begin tot eind;
+- de aanvraagrondleiding: die navigeert zelf naar het formulier.
+
+**Fout gevonden en opgelost:** bij grote onderdelen viel de uitlegkaart buiten beeld.
+
+**Op mobiel** zitten de menuknoppen in het menu dat dicht staat. Die stappen worden daarom overgeslagen en de rondleiding gaat netjes verder.
+
+**Niet in de browser getest:** de rondleidingen in het beheerportaal. Dat vraagt een Zite-login.
+
+### Learning Academy
+
+**Zeven leertrajecten:** Sales, Monteur, Partnerbeheer, Administratie, Meldkamer, IT en Beheer. Elk traject bestaat uit gepubliceerde handleidingen en rondleidingen.
+
+**Voortgang** wordt per gebruiker bewaard in de tabel **Leervoortgang**:
+- in het beheer per e-mailadres, in het portaal per medewerker;
+- Devision die meekijkt legt niets vast.
+
+**Kennischecks:** 56 vragen, afgeleid uit de procesdefinities. Ze vragen wie een stap uitvoert en welke stap erna volgt, en lopen dus automatisch gelijk met de code.
+
+**Server getest:** markeren, dubbele invoer voorkomen, en een andere medewerker ziet de voortgang niet.
+
+**Browser getest:** een voltooide rondleiding telt mee in de trajecten.
+
+**Let op:** de partnertrajecten bevatten nu alleen rondleidingen. De handleidingen erin verschijnen zodra de 15 partnerartikelen in Handleidingbeheer zijn gepubliceerd.
+
+### Statistiek
+
+Handleidingbeheer toont nu ook:
+- per rondleiding hoe vaak hij is voltooid en afgebroken;
+- per leertraject het aantal gebruikers en afgeronde onderdelen.
+
+### Nog open
+
+1. **Partnerartikelen:** de 15 artikelen controleren en publiceren. Dat is jouw beslissing.
+2. **AI-assistent:** vraagt een besluit over leverancier en kosten.
+3. **Rondleidingen beheren zonder code:** ze staan nu in de code, net als de processtappen.
+4. **Documentatiecontrole op formuliervelden en knoppen.**
+5. **Rondleidingen in het beheerportaal** testen in de browser.
+6. **Leervoortgang bij een adreswijziging:** gaat nog niet automatisch mee als het e-mailadres van een beheerder wijzigt.
