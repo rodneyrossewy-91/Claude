@@ -493,4 +493,4 @@ De doorlooptijd, offertes met akkoord en "in één keer goed" stonden al op het 
 
 **Documentatiecontrole:** na deze update geen verschillen meer.
 
-**Ter controle staan nu:** 28 + 8 nieuwe + 4 bijgewerkte processtappen. De 4 processtappen en de 3 schermhandleidingen stonden al ter controle, dus het totaal is 36.
+**Stand in het Help Center:** 36 handleidingen ter controle en 68 gepubliceerd (geteld in de database).
