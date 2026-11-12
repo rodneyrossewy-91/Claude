@@ -443,3 +443,22 @@ De doorlooptijd, offertes met akkoord en "in één keer goed" stonden al op het 
 - Of de API een site tijdelijk in test kan zetten en de stand kan teruggeven. Dan worden `zetTestmodusInEvalink` en `testmodusUitEvalink` ingevuld en gaat `EVALINK_TESTMODUS_GEBOUWD` aan.
 - In welk formaat Evalink het zonenummer in een event geeft. De doormeldtest vergelijkt nu het nummer uit het installatiedossier, waarbij voorloopnullen niet meetellen ("007" = "7").
 - Welke soorten events Evalink gebruikt. Het maandrapport telt per soort zoals Evalink die geeft.
+
+---
+
+## Update: gebruiksgemak voor monteur, sales en administratie (12 november 2026)
+
+**Status:** gebouwd en gepubliceerd. Zite-commits `359e9ad` en de tekstcorrectie daarna.
+
+| Onderdeel | Waar | Wat het doet | Getest |
+|---|---|---|---|
+| **Portaal als app** | Mijn profiel | Op het beginscherm zetten; de app opent schermvullend met de persoonlijke link. Android: knop; iPhone: uitleg via Delen. Waarschuwing: alleen op je eigen telefoon | Browser: manifest, iconen en uitleg aanwezig, geen fouten |
+| **Foto maken en verkleinen** | Bijlagen (installatiedossier en aanvraag) | Knop "Foto maken" opent de camera. Foto's boven 0,6 MB gaan verkleind mee (langste zijde 2000 px, JPEG): ca. 0,3 tot 0,8 MB in plaats van 4 tot 8 MB | Typecheck; niet op een echte telefoon getest |
+| **Vandaag** | Werklijst van de monteur | Eigen installaties van vandaag en morgen, met Navigeren en Bel contactpersoon | Alleen eigen dossiers; afgeronde dossiers vallen weg. Er was geen lopende installatie voor vandaag of morgen om het positieve geval te tonen |
+| **Dossier zonder bereik** | Installatiedossier | Zonder verbinding blijft de invoer op het toestel en gaat mee zodra er bereik is. Bij heropenen: Terugzetten of Weggooien. **Codewoorden worden nooit op het toestel bewaard** | Typecheck; niet met echt verbindingsverlies getest |
+| **Meerdere adressen** | Klanten → klant | Per bekend adres zonder aansluiting of nieuw adres (postcode + huisnummer, met filiaalnummer bij een keten) een concept met dezelfde klant-, factuurgegevens en diensten. Niets wordt ingediend | Browser: concept aangemaakt en daarna verwijderd |
+| **Klantherinnering** | Automatisering (elk uur), instelling per partner onder Herinneringen | De klant krijgt na 5 en 10 dagen een herinnering met dezelfde akkoordlink, zonder prijzen. Alleen als sales de offerte via het portaal mailde, de offerte nog openstaat en geldig is. Standaard aan | Er staan nu geen verzonden offertes open, dus er is niets verstuurd; het versturen zelf is niet getest |
+| **Eerste controle** | Werkbak Eerste controle | Aansluitnummer vinkt zich af zodra het is ingevuld. Klantgegevens: automatische controles (naam, KVK, adres, contactpersoon, diensten); als alles klopt staat het vinkje alvast aan (uit te zetten). Na afronden opent het volgende open dossier | DETEC-2026-0090: alle 5 controles groen |
+| **Meldingen** | Bel-icoon naast de paginatitel | Gebeurtenissen van de laatste 14 dagen op dossiers waar je sales of monteur bent, door anderen. Alleen de korte actie, geen details of bedragen. "Gezien" per toestel | 8 medewerkers: alleen eigen dossiers, geen bedragen; browser: lijst opent |
+
+**Niet gedaan:** "opslaan en volgende" in de finale controle; die zit in het dossier zelf en heeft geen lijst om naar door te gaan.
