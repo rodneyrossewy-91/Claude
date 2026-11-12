@@ -369,3 +369,25 @@ De bestaande omzetting bij een gewijzigd e-mailadres (`zetEmailOm`) neemt nu ook
 ### Regressie
 
 De 20 vingerafdrukken van de beheerendpoints zijn identiek. Alle testgegevens zijn verwijderd.
+
+---
+
+## Update: Help Center en procescoach afgemaakt, kwaliteit en zekerheid (12 november 2026)
+
+**Status:** gepubliceerd. Commits `2d6d50f` en `bbb9ad7`.
+
+| Onderdeel | Wat er is gebouwd | Getest |
+|---|---|---|
+| **Procescoach in meer schermen** | Wijzigingen en opzeggingen (beheer en portaal), werkbak Eerste controle. De finale controle en de meldkamer openen het dossier al, en hadden de coach dus al | Wijzigingscoach op de bestaande opzegging; 4 van 4 keer geweigerd voor andere partners |
+| **Uitleg per portaalscherm** | 11 concept-artikelen (Taken, Dashboard, Aansluitingen, Klanten, Planning, Facturen, Documenten, Producten, Team, Nieuwe aanvraag, Wijziging), ter controle | Inhoud gebaseerd op de schermen zelf |
+| **Veldtips** | Onderdeel `VeldTip` bij Bellen, Technisch, Codewoord en Sleutelhouder. Een tip verschijnt alleen met een gepubliceerd artikel `tip:<veld>`. Concepten voor Bellen en Codewoord. Sleutelhouder en Technisch staan niet in de code beschreven: die tekst vul je zelf in | Typecheck in orde |
+| **Schermafbeeldingen** | 6 echte screenshots bij 7 handleidingen (dashboard, Taken, nieuwe aanvraag, wijziging, procescoach, installatiedossier op de telefoon). Klantnamen, adressen, postcodes, telefoonnummers, e-mailadressen, partnerlogo, referenties en bedragen zijn onleesbaar gemaakt | Tijdens het maken werd elk opslag- en indienverzoek geblokkeerd; geen dossier gewijzigd |
+| **Nachtelijke regressietest** | Portaal om 02:43: partnerscheiding, procescoach, wijzigingscoach en Help Center, hooguit 1 keer per 20 uur. Beheer om 03:13: 20 kernfuncties, coach per dossier, afscherming van het Help Center, documentatiecontrole en de uitslag van de portaaltest. Een afwijking komt in de dagelijkse foutmelding; kaart in Automatiseringen | Eerste echte run: portaal 68 controles zonder lek; beheer 5 van 5 groen |
+| **Testlijst beheerportaal** | `rapporten/Testlijst-beheerportaal.md` en in het Help Center (rol Beheer): 14 stappen, ongeveer 10 minuten | n.v.t. |
+| **Toegankelijkheid** | Paginataal `nl`; tekst in de huisstijlkleur krijgt automatisch een leesbare tint (minstens 4,5:1) | Eigen controle op 6 schermen: geen knoppen of velden zonder naam, geen afbeeldingen zonder alt-tekst, zichtbare focus bij het tabben |
+
+**Open beslissing toegankelijkheid:** witte tekst op lichte partnerkleuren (bij DETEC 2,26:1) en witte tekst op DEVISION-groen (3,0:1) halen niet de vereiste 4,5:1. Dit raakt de huisstijl zelf. Er zijn twee mogelijkheden:
+- donkere tekst op lichte knoppen;
+- een iets donkerdere knopkleur.
+
+**Niet automatisch:** de browsertest van het portaal draait niet 's nachts, omdat Zite geen browser heeft. Die doe ik bij grotere wijzigingen.
