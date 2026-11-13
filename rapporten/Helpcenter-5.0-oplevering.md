@@ -494,3 +494,28 @@ De doorlooptijd, offertes met akkoord en "in één keer goed" stonden al op het 
 **Documentatiecontrole:** na deze update geen verschillen meer.
 
 **Stand in het Help Center:** 36 handleidingen ter controle en 68 gepubliceerd (geteld in de database).
+
+---
+
+## Update: testomgeving voor collega's (13 november 2026)
+
+**Status:** gebouwd en gepubliceerd. Zite-commit `6adc9f2`. Er staan nu geen testers of testgegevens in; Rodney maakt de testers zelf aan.
+
+**Hoe het werkt:**
+- Beheer → Werk → **Testen**. Beheer voegt een tester toe met naam en e-mailadres. Per tester worden drie accounts gemaakt in de testpartner "ZZTEST Beveiliging": Sales, Monteur en Partnerbeheerder. "Links mailen" stuurt de tester zijn drie persoonlijke links.
+- De tester opent vanuit Testen elke rol in een **vast eigen tabblad**, zonder inloggen of wisselen. Bovenaan staat een gekleurde balk: blauw voor Sales, oranje voor Monteur, paars voor Partnerbeheerder. De rol staat ook in de tabtitel, bijvoorbeeld "[Monteur] Aanvragen".
+- **Testdossiers:** per dossier wie aan zet is, met knoppen om het dossier direct in de juiste rol te openen of "In beheer" voor de stappen van Devision.
+- **Mails:** in de mailtestmodus gaan mails aan een tester naar de tester zelf. Tip voor testers: gebruik je eigen e-mailadres als e-mail van de klant.
+- **Na de test:** "Testomgeving verwijderen" toont eerst wat er weggaat. Na het intypen van VERWIJDER gaat alles weg: testpartner, accounts, dossiers en alles wat eraan hangt.
+
+**Veiligheid:**
+- De testpartner ziet geen echte dossiers en echte partners zien geen testdossiers (getest in beide richtingen).
+- Voor de testpartner worden **nooit factuurregels** gemaakt, dus er gaat niets naar een factuurrun of Exact.
+- De testpartner telt niet mee in de gemiddelden van partners.
+- Verwijderen raakt alleen de partner met code ZZTEST die in de testomgeving is vastgelegd.
+
+**Getest:**
+- Met een tijdelijke tester: testpartner met 105 diensten, drie accounts met de juiste rol en de juiste toegang tot het portaal, testdossier met "aan zet: eerste controle", en een rolbalk en tabtitel per rol (browser).
+- Daarna de testomgeving verwijderd via de nieuwe functie. Partner, accounts, dossier, assortiment, historie en instelling waren weg, het DETEC-dossier was ongemoeid. Zonder het woord VERWIJDER weigert de functie.
+
+**Nog te doen door Rodney:** de 4 testers toevoegen, en ze in Beheergebruikers de rollen Administratie en Meldkamer geven. De handleiding "Het portaal testen met collega's" staat in het Help Center (intern, gepubliceerd).
