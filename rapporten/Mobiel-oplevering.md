@@ -68,8 +68,11 @@ Desktop (1280 px): geen overflow en geen fouten. De zijbalk, de tabellen en de g
 
 ## Nog openstaand
 
-- **Code splitting.** De apps worden als één bundel geladen. Voor snellere eerste schermen kunnen zware schermen apart worden geladen; dat heb ik nog niet gedaan, omdat de laadtijd nu 2 tot 3,5 s is en de winst eerst gemeten moet worden.
-- **Beheer als app op het beginscherm.** Het beheer draait op app.zite.com binnen de omgeving van Zite; een eigen app-manifest is daar niet mogelijk. Het partnerportaal is wel installeerbaar (sinds 12 november).
+- **Snelheid (onderzocht op 13 november):** de code van het portaal is 1,7 MB (436 KB ingepakt) en is binnen in 0,9 – 1,3 s. De meeste wachttijd zit niet in de code maar in de opvragen bij Zite: op de server zelf duren ze 0,05 – 0,9 s, maar in de browser 1 – 5 s, en dat varieert sterk per keer.
+  - **Doorgevoerd:** de dashboardgegevens worden één keer opgehaald in plaats van twee keer; meldingen en de documententeller worden pas na het eerste scherm opgehaald; de klantpagina's worden apart geladen.
+  - **Gemeten (iPhone-formaat):** eerste scherm 1,6 – 3,8 s, dashboard gevuld 3,9 – 6,8 s. Voor de wijziging: 2,8 – 3,7 s en 3,9 – 6,5 s. Het verschil valt binnen de spreiding van Zite.
+  - **Mogelijke volgende stappen:** (1) de opvragen bij het openen bundelen tot één opvraag, omdat elke aanroep bij Zite 1 – 3 s verwerkingstijd kost; (2) bij het openen meteen de gegevens van het vorige bezoek tonen en op de achtergrond verversen. Code opsplitten levert hooguit een halve seconde op.
+- **Beheer als app op het beginscherm:** sinds 13 november mogelijk via q2yedas16g.zite.so (eigen icoon en schermvullend). Na het installeren log je één keer in binnen de app. Niet getest op een echt toestel, omdat het achter de inlog van Zite zit.
 - **Swipe-acties** in lijsten: niet toegevoegd, omdat ze slecht te ontdekken zijn en snel per ongeluk worden geactiveerd.
 
 ## Richtlijnen voor nieuwe schermen
