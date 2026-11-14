@@ -518,4 +518,6 @@ De doorlooptijd, offertes met akkoord en "in één keer goed" stonden al op het 
 - Met een tijdelijke tester: testpartner met 105 diensten, drie accounts met de juiste rol en de juiste toegang tot het portaal, testdossier met "aan zet: eerste controle", en een rolbalk en tabtitel per rol (browser).
 - Daarna de testomgeving verwijderd via de nieuwe functie. Partner, accounts, dossier, assortiment, historie en instelling waren weg, het DETEC-dossier was ongemoeid. Zonder het woord VERWIJDER weigert de functie.
 
-**Nog te doen door Rodney:** de 4 testers toevoegen, en ze in Beheergebruikers de rollen Administratie en Meldkamer geven. De handleiding "Het portaal testen met collega's" staat in het Help Center (intern, gepubliceerd).
+**Update 14 november:** de tester krijgt automatisch de rol Administratie in het beheer (alleen als hij nog geen toegang had). Bij uitzetten of verwijderen wordt dat precies teruggedraaid. De rol Meldkamer is niet nodig, want Administratie mag alle stappen van Devision. "Links mailen" stuurt nu een volledige instructiemail met testscenario; met "Voorbeeld van de mail naar mij" zie je hem eerst zelf.
+
+**Nog te doen door Rodney:** de 4 testers toevoegen. Voor het beheerportaal moeten ze lid zijn van de Zite-organisatie. De handleiding "Het portaal testen met collega's" staat in het Help Center (intern, gepubliceerd).
