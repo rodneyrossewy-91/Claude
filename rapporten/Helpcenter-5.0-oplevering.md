@@ -542,3 +542,6 @@ De doorlooptijd, offertes met akkoord en "in één keer goed" stonden al op het 
 - **Getest:** een dossier met een bestaand Site ID wordt geweigerd (geen tweede site), zonder de instelling wordt het geweigerd, en met de instelling volgt "nog niet gekoppeld" zonder wijzigingen. De tijdelijke instelling is weer verwijderd.
 
 **Nodig van Evalink:** welke receivers dit ondersteunen, het endpoint om een site (inactief) met receiverinstelling aan te maken, welke gegevens Evalink nodig heeft (klant, adres, aansluitnummer, paneeltype, transmissiepad?), en wat terugkomt (Site ID, intern ID, receiver-account, IP en poort). Daarna wordt `maakSiteInEvalink` ingevuld en `EVALINK_SITE_GEBOUWD` aangezet.
+
+
+**Update 14 november (mail):** de instructiemail voor testers staat nu volledig in de Devision-stijl: de rollinks in het gegevensblok tussen de groene lijnen, geen emoji's, een groene knop "Naar de testpagina" en een voetnoot. Bedrijfsgegevens staan er niet onder, want het is een interne mail.
