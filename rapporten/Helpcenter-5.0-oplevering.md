@@ -529,3 +529,16 @@ De doorlooptijd, offertes met akkoord en "in één keer goed" stonden al op het 
 - **"Partnerbeheerder" heet voortaan "Eigenaar/directie".** Dat is de medewerker van het installatiebedrijf met de schakelaar Partnerportaal (dashboard, planning, facturen, producten, team). De naam is aangepast in Team en Medewerkers (label en schakelaar), in Handleidingbeheer, Documentbeheer en Rondleidingen, in de Academy ("Academy eigenaar/directie"), in de testomgeving en de instructiemail, en in 4 handleidingen. De interne sleutel blijft, zodat bestaande handleidingen en documentrechten werken.
 - **Monteurs zien Klanten:** alleen inzien, met adressen, dossiers en contactgegevens, ook in de navigatie onderaan. Het maandrapport en "Aanvragen voor meerdere adressen" blijven voor sales en eigenaar/directie.
 - **Getest:** met een tijdelijke ZZTEST-monteur zonder Partnerportaal bij DETEC. Hij zag 6 klanten, het maandrapport werd geweigerd, en daarna is hij verwijderd. De handleiding Klanten staat nu ook voor de monteur en is aangevuld (ter controle).
+
+---
+
+## Update: Site voorbereiden via Evalink (14 november 2026)
+
+**Status:** gebouwd en gepubliceerd, maar **nog niet gekoppeld**. De aanroep naar Evalink volgt zodra de API-gegevens er zijn.
+
+- **Instellingen → Receivers:** per paneelprofiel de schakelaar "Automatisch via Evalink".
+- **Site voorbereiden** (bij paneelprofielen waar dat aanstaat, zolang er nog geen Site ID is): de knop **"Site aanmaken in Evalink"**. Die maakt de site inactief aan, vult Site ID, receiver-account en IP-adres met poort in, vinkt "Site aangemaakt" en "Receiver ingesteld" af, en legt het vast in de historie. Daarna kunnen de paneelgegevens zoals altijd naar de monteur.
+- **Receivers zonder koppeling:** zoals nu, handmatig.
+- **Getest:** een dossier met een bestaand Site ID wordt geweigerd (geen tweede site), zonder de instelling wordt het geweigerd, en met de instelling volgt "nog niet gekoppeld" zonder wijzigingen. De tijdelijke instelling is weer verwijderd.
+
+**Nodig van Evalink:** welke receivers dit ondersteunen, het endpoint om een site (inactief) met receiverinstelling aan te maken, welke gegevens Evalink nodig heeft (klant, adres, aansluitnummer, paneeltype, transmissiepad?), en wat terugkomt (Site ID, intern ID, receiver-account, IP en poort). Daarna wordt `maakSiteInEvalink` ingevuld en `EVALINK_SITE_GEBOUWD` aangezet.

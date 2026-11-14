@@ -40,4 +40,4 @@ Bewust uitgesteld. Niet bouwen zonder akkoord van Rodney.
 - Btw-code, grootboek en frequentie aanleveren voor de 3 factuurregels van DETEC-2026-0016. Daarna het afboeken van een factuurrun van begin tot eind testen.
 - Echte e-mailadressen invullen en MAIL_TESTMODUS uitzetten.
 - Paginering op de server pas bouwen als de performancemeting groei laat zien.
-- Evalink koppelen (eventlog, doormeldtest, testmodus en maandrapport): API-beschrijving, Company ID, bevestiging Site ID, of testmodus via de API kan, het zoneformaat in events, en de API-sleutel (als omgevingsvariabele in Zite) aanleveren.
+- Evalink koppelen (eventlog, doormeldtest, testmodus, maandrapport en site aanmaken): welke receivers automatisch een site kunnen krijgen, API-beschrijving, Company ID, bevestiging Site ID, of testmodus via de API kan, het zoneformaat in events, en de API-sleutel (als omgevingsvariabele in Zite) aanleveren.
