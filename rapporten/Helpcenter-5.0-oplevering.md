@@ -545,3 +545,18 @@ De doorlooptijd, offertes met akkoord en "in één keer goed" stonden al op het 
 
 
 **Update 14 november (mail):** de instructiemail voor testers staat nu volledig in de Devision-stijl: de rollinks in het gegevensblok tussen de groene lijnen, geen emoji's, een groene knop "Naar de testpagina" en een voetnoot. Bedrijfsgegevens staan er niet onder, want het is een interne mail.
+
+---
+
+## Update: drie automatiseringen (14 november 2026)
+
+1. **Offerte versturen in één stap.** Staat een dossier op "Offerte opgesteld", dan ziet sales in de aanvraag de knop **"Offerte versturen"**. Die zet de offerte op verzonden, start de herinneringen en mailt de klant de akkoordlink. Eerst op verzonden zetten en daarna apart de link sturen is niet meer nodig. Bij meekijken of als de klant geen eigen akkoord geeft, staat de knop er niet.
+2. **Finale controle met automatische controles.** Per controlepunt toont de beheerder wat het systeem al heeft nagekeken, met ✓ of ✗. Voorbeelden: klant compleet (KVK-controle, objectadres), contactpersonen met telefoon en codewoord, commerciële beoordeling afgerond, contract (looptijd, betaalwijze, IBAN bij incasso, factuuradres), en oplevering (technisch gereed, receiver online, alle zones getest). Klopt alles bij een punt, dan staat het vinkje alvast aan. **Goedkeuren en activeren blijven handwerk.**
+3. **Maandelijkse conceptfactuurrun.** Op de eerste werkdag van de maand om 06:47 zet het systeem per BV een factuurrun klaar als **concept**. Er wordt niets geëxporteerd of afgeboekt. Dat gebeurt niet als er al een open concept is, als er deze maand al een run bestaat, of als er niets te factureren is. De administratie krijgt een seintje met het aantal regels per BV, zonder bedragen.
+
+**Getest:**
+- Finale controle: DETEC-2026-0077 is volledig groen. Bij 0090 staat ✗ door de open commerciële beoordeling, bij 0016 door het codewoord en de bevestiging van sales.
+- Factuurrun: de geplande run doet buiten de eerste werkdag niets. Er staan nu 0 regels klaar, dus er is geen run aangemaakt.
+- Offerte versturen: dossiers in een andere fase worden geweigerd. Een geslaagde verzending kon niet worden getest, want er staat nu geen dossier op "Offerte opgesteld". Dat volgt bij de eerstvolgende echte offerte of via de testomgeving.
+
+**Help Center:** de procesbeschrijvingen van de offerte, het inrichten en de factuurrun zijn bijgewerkt en staan **Ter controle**.

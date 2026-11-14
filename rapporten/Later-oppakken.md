@@ -33,6 +33,11 @@ Bewust uitgesteld. Niet bouwen zonder akkoord van Rodney.
 - De partnerscheidingstest draaien (`apps/aanmelding-3b/src/tests/partnerscheiding.ts`).
 - Eerst testen met ZZTEST-records.
 
+## Automatiseringen voor later (besloten 14 november 2026)
+
+- **Objectcode automatisch aanvragen bij het opvolgbedrijf.** Nu vraagt de administratie de objectcode handmatig aan. Daarvoor is nodig hoe het opvolgbedrijf aanvragen ontvangt (API, vast mailformaat of portaal) en hoe de objectcode terugkomt.
+- **Zones en contactpersonen automatisch naar Evalink.** Na het aanmaken van de site de zones en de contactpersonen met codewoorden doorzetten. Daarvoor is de Evalink-API nodig, met het zone- en contactformaat. Codewoorden gaan alleen versleuteld en rechtstreeks naar Evalink, nooit via mail of meldingen.
+
 ## Andere open punten bij Rodney
 
 - `ZITE_CODEWOORD_SLEUTEL` instellen. Daarna `versleutelCodewoorden` en `zetSleutelsOm` opnieuw draaien.
