@@ -521,3 +521,11 @@ De doorlooptijd, offertes met akkoord en "in één keer goed" stonden al op het 
 **Update 14 november:** de tester krijgt automatisch de rol Administratie in het beheer (alleen als hij nog geen toegang had). Bij uitzetten of verwijderen wordt dat precies teruggedraaid. De rol Meldkamer is niet nodig, want Administratie mag alle stappen van Devision. "Links mailen" stuurt nu een volledige instructiemail met testscenario; met "Voorbeeld van de mail naar mij" zie je hem eerst zelf.
 
 **Nog te doen door Rodney:** de 4 testers toevoegen. Voor het beheerportaal moeten ze lid zijn van de Zite-organisatie. De handleiding "Het portaal testen met collega's" staat in het Help Center (intern, gepubliceerd).
+
+---
+
+## Update: Eigenaar/directie en klanten voor de monteur (14 november 2026)
+
+- **"Partnerbeheerder" heet voortaan "Eigenaar/directie".** Dat is de medewerker van het installatiebedrijf met de schakelaar Partnerportaal (dashboard, planning, facturen, producten, team). De naam is aangepast in Team en Medewerkers (label en schakelaar), in Handleidingbeheer, Documentbeheer en Rondleidingen, in de Academy ("Academy eigenaar/directie"), in de testomgeving en de instructiemail, en in 4 handleidingen. De interne sleutel blijft, zodat bestaande handleidingen en documentrechten werken.
+- **Monteurs zien Klanten:** alleen inzien, met adressen, dossiers en contactgegevens, ook in de navigatie onderaan. Het maandrapport en "Aanvragen voor meerdere adressen" blijven voor sales en eigenaar/directie.
+- **Getest:** met een tijdelijke ZZTEST-monteur zonder Partnerportaal bij DETEC. Hij zag 6 klanten, het maandrapport werd geweigerd, en daarna is hij verwijderd. De handleiding Klanten staat nu ook voor de monteur en is aangevuld (ter controle).
