@@ -37,6 +37,10 @@ Zoeken in het beheer blijft rechtsboven in de kopregel.
 - **Segmenten en filters in het beheer** (Nieuwe aansluitingen, Inrichten, Handleidingbeheer): één schuifbare rij.
 - **Bulkacties, rondleiding en wizardnavigatie:** blijven boven de onderbalk.
 
+## Opgelost na melding (14 november)
+
+- **Rondleiding op de telefoon** liep langs alle stappen zonder iets aan te wijzen en eindigde na ongeveer 20 seconden bij Afronden. Oorzaak: de stappen wezen naar de menu-items van de zijbalk, die op mobiel is vervangen door de onderbalk. Nu wijst een stap naar het knopje in de onderbalk, of naar "Meer" met de uitleg dat het daar staat. De uitlegkaart staat bovenin als het knopje onderin zit. Getest: de portaalrondleiding (9 stappen) op iPhone-formaat; alle stappen worden aangewezen.
+
 ## Getest
 
 Getest met Playwright op het live partnerportaal met DETEC-accounts (sales en monteur). Opslaan en indienen waren geblokkeerd, dus er is niets gewijzigd.
